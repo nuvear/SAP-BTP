@@ -1,0 +1,99 @@
+---
+doc_id: NW-POL-003
+title: Discontinued Product and Substitution Guide
+doc_type: policy
+owner: Purchasing Lead
+version: 1.0
+status: current
+effective_from: 2026-01-01
+effective_to:
+classification: internal
+audience: all-staff
+related_entities: ProductID 4, 5, 9, 17, 24, 28, 29, 42, 53, 54, 55
+---
+
+Northwind Traders - Discontinued Product and Substitution Guide
+
+Purpose
+
+This guide explains how sales and customer service staff handle order
+lines for products that Northwind no longer buys from its suppliers.
+
+How to tell that a product is discontinued
+
+A product is discontinued when the Discontinued flag in the product
+master is set. The product master is the only authoritative source. The
+list at the end of this guide exists to record approved substitutes. It
+is not a stock report and it is not the place to check whether a product
+is discontinued.
+
+Discontinued products are never replenished. Their reorder level and
+their units on order are both zero, and Purchasing will not raise a
+purchase order for them.
+
+Selling the remaining stock
+
+Remaining stock of a discontinued product is sold until it is gone.
+
+The quantity on an order line for a discontinued product may not be
+higher than the units in stock at the time the order is confirmed.
+Northwind does not accept backorders for discontinued products. If a
+customer wants more than the remaining stock, the line is reduced to the
+remaining stock or removed, and the customer is told why.
+
+When the stock of a discontinued product is zero, the line cannot be
+fulfilled at all.
+
+Clearance discount
+
+To help clear remaining stock, a sales representative may give a
+discount of up to 15 percent on a discontinued product on their own
+authority. This is an exception to the normal 10 percent limit in the
+Discount Authority Policy (NW-POL-001). A clearance discount above
+15 percent follows the normal approval tiers in that policy.
+
+The clearance discount applies only to order lines for discontinued
+products that still have stock. It does not apply to the other lines on
+the same order.
+
+Offering a substitute
+
+When a discontinued product cannot be supplied, staff may offer the
+approved substitute from the list below.
+
+A substitution always needs the consent of the customer before the
+order is changed. Some key accounts have stricter consent rules, which
+are recorded in their account notes.
+
+The substitute is sold at its own list price. Northwind does not match
+the price of the discontinued product.
+
+Where the list shows no approved substitute, staff must not propose one
+themselves. The request goes to the Purchasing Lead at
+purchasing@northwind.example, who replies within 2 business days.
+
+Approved substitutes
+
+Product 5, Chef Anton's Gumbo Mix (Condiments):
+approved substitute is product 4, Chef Anton's Cajun Seasoning.
+
+Product 29, Thüringer Rostbratwurst (Meat/Poultry):
+approved substitute is product 55, Pâté chinois.
+
+Product 53, Perth Pasties (Meat/Poultry):
+approved substitute is product 54, Tourtière.
+
+Product 9, Mishi Kobe Niku (Meat/Poultry):
+no approved substitute.
+
+Product 17, Alice Mutton (Meat/Poultry):
+no approved substitute.
+
+Product 24, Guaraná Fantástica (Beverages):
+no approved substitute.
+
+Product 28, Rössle Sauerkraut (Produce):
+no approved substitute.
+
+Product 42, Singaporean Hokkien Fried Mee (Grains/Cereals):
+no approved substitute.

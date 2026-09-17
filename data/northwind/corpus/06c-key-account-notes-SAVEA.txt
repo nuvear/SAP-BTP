@@ -1,0 +1,61 @@
+---
+doc_id: NW-ACC-SAVEA
+title: Key Account Notes - Save-a-lot Markets
+doc_type: account-notes
+owner: Nancy Davolio
+version: 1.0
+status: current
+effective_from: 2026-01-01
+effective_to: 2026-12-31
+classification: internal
+audience: sales
+related_entities: CustomerID SAVEA
+---
+
+Northwind Traders - Key Account Notes: Save-a-lot Markets (CustomerID SAVEA)
+
+Account summary
+
+Save-a-lot Markets is a supermarket chain based in Boise, Idaho, USA.
+It is one of the three Northwind key accounts for 2026. Key account
+status is assigned by the Vice President, Sales once a year.
+
+The account manager is Nancy Davolio, Sales Representative. The main
+contact is Jose Pavarotti, who is a Sales Representative at Save-a-lot
+Markets.
+
+Contract discount
+
+Save-a-lot Markets has signed a supply contract with Northwind that
+runs from 1 June 2026 to 31 May 2027. Under the contract, every line on
+an order placed during that period receives a discount of 5 percent.
+Orders placed before 1 June 2026 do not receive the contract discount.
+
+The contract discount is not added on top of the approval tiers. It
+counts toward them. For example, if a representative wants to give a
+further 10 percent on a line, the total line discount is 15 percent,
+which is above the representative's own authority of 10 percent and
+needs approval from the Sales Manager under the Discount Authority
+Policy (NW-POL-001).
+
+Shipping preferences
+
+Save-a-lot Markets prefers Speedy Express for all shipments, and its
+contract prices were agreed on that basis.
+
+Substitutions and partial shipments
+
+Save-a-lot Markets accepts approved substitute products. Consent from
+any buyer at the customer, by email or telephone, is enough. The
+account manager records who gave the consent and when.
+
+Save-a-lot Markets accepts partial shipments. When a line cannot be
+filled, the rest of the order ships and the outstanding line follows.
+
+Expedite terms for key accounts
+
+As a key account, Save-a-lot Markets may have an order expedited when
+its required date is within 10 calendar days, instead of the standard
+5. Northwind absorbs the expedite surcharge for key accounts, so the
+customer is not charged. The conditions and the approval rules in the
+Order Expedite and Shipping Policy (NW-POL-002) still apply in full.

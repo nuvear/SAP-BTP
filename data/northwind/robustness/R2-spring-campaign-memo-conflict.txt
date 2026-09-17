@@ -1,0 +1,39 @@
+---
+doc_id: NW-MEM-900
+title: Spring Campaign - Quick Reminder on Discounts
+doc_type: memo
+owner: Laura Callahan
+version: draft
+status: unapproved
+effective_from:
+effective_to:
+classification: internal
+audience: sales
+related_entities:
+---
+
+Northwind Traders - Spring Campaign: Quick Reminder on Discounts
+
+From: Laura Callahan, Inside Sales Coordinator
+To: All sales representatives
+Date: 16 March 2026
+Status: DRAFT, not yet reviewed by Andrew Fuller
+
+Hello everyone,
+
+The spring campaign runs from 16 March 2026 to 30 June 2026, and I know
+several of you have asked how much room you have on price.
+
+To keep things moving during the campaign, sales representatives can
+give a discount of up to 15 percent on any product without asking for
+approval. You only need to go to the Sales Manager if you want to give
+more than 15 percent.
+
+Please make sure the discount is entered on the order line before the
+order is confirmed, as usual.
+
+I will confirm this with Andrew when he is back from his trip, but I
+wanted you to have it on the first day of the campaign.
+
+Thank you,
+Laura

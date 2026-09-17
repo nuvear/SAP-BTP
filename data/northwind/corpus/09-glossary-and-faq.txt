@@ -1,0 +1,124 @@
+---
+doc_id: NW-GLO-001
+title: Sales and Customer Service Glossary and FAQ
+doc_type: reference
+owner: Laura Callahan
+version: 1.0
+status: current
+effective_from: 2026-04-01
+effective_to:
+classification: internal
+audience: all-staff
+related_entities:
+---
+
+Northwind Traders - Sales and Customer Service Glossary and FAQ
+
+This document explains the everyday terms that Northwind staff use on
+the telephone and in email, and links each one to the official term
+used in the policies. It also answers a few frequent questions. It does
+not set any rules of its own. Where a rule is mentioned, the policy
+named next to it is the authority.
+
+Glossary
+
+Rush order, rush job, hot order:
+All three mean an expedited order. The official term is "expedite".
+See the Order Expedite and Shipping Policy (NW-POL-002).
+
+RDD:
+Required delivery date. In the order system this is the field
+RequiredDate.
+
+Late order:
+An order whose shipped date is after its required date.
+
+Overdue order:
+An order that has not shipped and whose required date has already
+passed.
+
+Short ship:
+A partial shipment. One or more lines are held back and the rest of
+the order ships.
+
+Ship complete:
+The opposite of a short ship. The customer accepts the order only as a
+single, complete shipment.
+
+Cold line:
+An order line for a chilled product, which means a product in the
+categories Dairy Products, Meat/Poultry or Seafood. See the Perishables
+Handling and Carrier Guide (NW-POL-004).
+
+Dry goods:
+Products in the ambient categories: Beverages, Condiments, Confections,
+Grains/Cereals and Produce.
+
+Delisted, end of line, EOL:
+All three mean a discontinued product. See the Discontinued Product and
+Substitution Guide (NW-POL-003).
+
+Sell-through:
+Selling the remaining stock of a discontinued product until it is gone.
+
+Swap:
+A substitution, where the customer agrees to take an approved
+substitute product.
+
+Clearance:
+The discount that a representative may give on a discontinued product
+that still has stock.
+
+ROP:
+Reorder point. A product is at its ROP when its reorder level is above
+zero and its stock is at or below that level. See the Reorder and
+Supplier Lead-Time Policy (NW-POL-005).
+
+On the water:
+Stock that has been ordered from the supplier and has not arrived. In
+the system this is the field UnitsOnOrder.
+
+KA:
+Key account. In 2026 the key accounts are QUICK-Stop, Ernst Handel and
+Save-a-lot Markets.
+
+Own authority:
+A discount or an expedite that a sales representative may agree without
+asking anyone.
+
+The queue:
+The Sales Approvals queue, sales-approvals@northwind.example, where
+every approval request is sent and recorded.
+
+Speedy, UP, Federal:
+Short names for the three carriers: Speedy Express, United Package and
+Federal Shipping.
+
+Frequent questions
+
+Who can approve a discount?
+It depends on the size of the discount. The tiers and the approvers are
+in the Discount Authority Policy (NW-POL-001).
+
+Can I promise a customer a delivery date when we are out of stock?
+Yes, but only the date worked out with the rule in the Reorder and
+Supplier Lead-Time Policy (NW-POL-005).
+
+Can I tell a customer how much stock we have?
+Only after you have checked the live system. Never quote a stock figure
+from a memo or an email.
+
+A customer wants a product we no longer sell. What can I offer?
+Only the approved substitute in the Discontinued Product and
+Substitution Guide (NW-POL-003). If none is listed, ask the Purchasing
+Lead.
+
+Which carrier should an order use?
+The economy carrier, Federal Shipping, is the default for dry goods.
+Cold lines limit the choice of carrier. See the Perishables Handling
+and Carrier Guide (NW-POL-004).
+
+Can the AI assistant approve a discount or an expedite?
+No. The assistant explains the rules and shows the current order data.
+Approvals are given only by the people named in the policies, through
+the queue.

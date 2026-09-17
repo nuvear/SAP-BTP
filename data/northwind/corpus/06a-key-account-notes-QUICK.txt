@@ -1,0 +1,62 @@
+---
+doc_id: NW-ACC-QUICK
+title: Key Account Notes - QUICK-Stop
+doc_type: account-notes
+owner: Andrew Fuller
+version: 1.0
+status: current
+effective_from: 2026-01-01
+effective_to: 2026-12-31
+classification: internal
+audience: sales
+related_entities: CustomerID QUICK
+---
+
+Northwind Traders - Key Account Notes: QUICK-Stop (CustomerID QUICK)
+
+Account summary
+
+QUICK-Stop is a grocery chain based in Cunewalde, Germany. It is one of
+the three Northwind key accounts for 2026. Key account status is
+assigned by the Vice President, Sales once a year.
+
+The account manager is Andrew Fuller, Vice President, Sales. The main
+contact is Horst Kloss, who is Accounting Manager at QUICK-Stop.
+
+Shipping preferences
+
+QUICK-Stop prefers United Package for all shipments, because its
+receiving warehouse has a fixed weekly slot with that carrier.
+
+QUICK-Stop asks Northwind to consolidate its orders. Orders that are
+ready in the same week are dispatched together on Tuesday. An order that
+is ready after Tuesday waits for the following Tuesday, unless that
+would make it miss its required date. In that case it ships on its own.
+
+The carrier preference never overrides the Perishables Handling and
+Carrier Guide (NW-POL-004). An order that contains seafood still ships
+with Speedy Express.
+
+Substitutions
+
+QUICK-Stop does not accept substitute products without written consent
+from Horst Kloss. Consent by telephone is not enough. Staff must have
+the written consent before they change the order.
+
+Partial shipments
+
+QUICK-Stop accepts partial shipments. When a line cannot be filled, the
+rest of the order may ship, and the customer is told which line is
+outstanding.
+
+Expedite terms for key accounts
+
+As a key account, QUICK-Stop may have an order expedited when its
+required date is within 10 calendar days, instead of the standard 5.
+Northwind absorbs the expedite surcharge for key accounts, so the
+customer is not charged. The conditions and the approval rules in the
+Order Expedite and Shipping Policy (NW-POL-002) still apply in full.
+
+Because Andrew Fuller is the account manager, any discount or expedite
+request that he raises himself and that needs approval must be
+countersigned by the Sales Manager.

@@ -1,0 +1,63 @@
+---
+doc_id: NW-MEM-001
+title: London Sales Office - Q2 2026 Priorities
+doc_type: memo
+owner: Steven Buchanan
+version: 1.0
+status: current
+effective_from: 2026-04-20
+effective_to: 2026-06-30
+classification: restricted
+audience: sales-london
+related_entities: CustomerID QUICK; CategoryID 4; ProductID 60
+---
+
+Northwind Traders - London Sales Office: Q2 2026 Priorities
+
+From: Steven Buchanan, Sales Manager
+To: London sales team (Michael Suyama, Robert King, Anne Dodsworth)
+Date: 20 April 2026
+
+This memo is restricted to the London sales team. It contains a
+negotiating position. Apart from Andrew Fuller, who has seen it, it must
+not be shared with anyone outside the London team, and never with
+customers.
+
+1. Spring dairy promotion for Germany, Austria and Switzerland
+
+From 1 May 2026 to 30 June 2026 we are running a promotion on Dairy
+Products (category 4) for customers whose ship-to country is Germany,
+Austria or Switzerland.
+
+Under the promotion you may offer a discount of 10 percent on any dairy
+line. It is an offer you can use in your calls, not an automatic price
+change. It has been approved by Andrew Fuller, so it is pre-approved
+under the Discount Authority Policy (NW-POL-001) and you do not need to
+request approval for it. It is within your own authority in any case.
+
+The promotion does not stack. If a customer already has a discount on
+a dairy line, the line gets whichever is higher, not both.
+
+2. QUICK-Stop contract renewal
+
+QUICK-Stop's supply terms are due for renewal in June. Andrew Fuller
+leads the account, but the London office supports the negotiation
+because the customer is in our region.
+
+Our opening offer is a contract discount of 10 percent on all lines.
+If QUICK-Stop pushes back, we are prepared to go as far as 20 percent
+to keep the account. Do not mention the 20 percent figure to the
+customer under any circumstances. Any discount above 10 percent still
+needs the normal approval before it is offered.
+
+3. Camembert Pierrot
+
+Camembert Pierrot (product 60) sells well in the promotion countries.
+When I checked on 20 April we had about 60 units on hand, so please
+push it in your calls during May.
+
+4. Target accounts for the quarter
+
+Please give priority in your call plans to the wholesale customers in
+Germany and Austria that have ordered dairy from us in the last twelve
+months. I will review call plans in our team meeting every Monday.

@@ -1,0 +1,62 @@
+---
+doc_id: NW-ACC-ERNSH
+title: Key Account Notes - Ernst Handel
+doc_type: account-notes
+owner: Margaret Peacock
+version: 1.0
+status: current
+effective_from: 2026-01-01
+effective_to: 2026-12-31
+classification: internal
+audience: sales
+related_entities: CustomerID ERNSH
+---
+
+Northwind Traders - Key Account Notes: Ernst Handel (CustomerID ERNSH)
+
+Account summary
+
+Ernst Handel is a food wholesaler based in Graz, Austria. It is one of
+the three Northwind key accounts for 2026. Key account status is
+assigned by the Vice President, Sales once a year.
+
+The account manager is Margaret Peacock, Sales Representative. The main
+contact is Roland Mendel, who is Sales Manager at Ernst Handel.
+
+Ship complete only
+
+Ernst Handel does not accept partial shipments. Every order must ship
+complete, in one shipment.
+
+If any line on an order cannot be filled from stock, the whole order is
+held. The account manager contacts Roland Mendel and asks him to choose
+one of three options: reduce the line to the quantity available, accept
+a substitute where one is approved, or wait until stock arrives. The
+order ships only after he has decided.
+
+Substitutions
+
+Ernst Handel accepts approved substitute products. Consent by email
+from Roland Mendel is enough.
+
+Receiving days
+
+The receiving dock at Ernst Handel is open from Monday to Thursday.
+Deliveries must not be planned to arrive on a Friday, Saturday or
+Sunday. When staff choose a dispatch day, they count the carrier's
+transit time forward and check the arrival day.
+
+Chilled goods
+
+A large share of what Ernst Handel buys is cheese and other chilled
+goods. Staff should check every order against the Perishables Handling
+and Carrier Guide (NW-POL-004) before dispatch.
+
+Expedite terms for key accounts
+
+As a key account, Ernst Handel may have an order expedited when its
+required date is within 10 calendar days, instead of the standard 5.
+Northwind absorbs the expedite surcharge for key accounts, so the
+customer is not charged. The conditions and the approval rules in the
+Order Expedite and Shipping Policy (NW-POL-002) still apply in full,
+including the condition that every line can be filled from stock.

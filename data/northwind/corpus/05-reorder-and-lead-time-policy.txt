@@ -1,0 +1,88 @@
+---
+doc_id: NW-POL-005
+title: Reorder and Supplier Lead-Time Policy
+doc_type: policy
+owner: Purchasing Lead
+version: 1.0
+status: current
+effective_from: 2026-01-01
+effective_to:
+classification: internal
+audience: all-staff
+related_entities: Products.UnitsInStock, Products.UnitsOnOrder, Products.ReorderLevel, Suppliers.Country
+---
+
+Northwind Traders - Reorder and Supplier Lead-Time Policy
+
+Purpose
+
+This policy explains how to read the three stock fields on a product,
+when Purchasing replenishes a product, and what delivery date staff may
+promise to a customer when stock is short.
+
+The three stock fields
+
+Units in stock is the quantity in the Seattle warehouse that is free to
+sell.
+
+Units on order is the quantity Northwind has already ordered from the
+supplier and not yet received.
+
+Reorder level is the stock quantity at which the product should be
+replenished.
+
+Stock and price figures must always be read from the live system at the
+moment they are needed. A figure quoted in a memo, an email, or any
+other document is never a valid source, however recent it looks.
+
+When a product has reached its reorder point
+
+A product has reached its reorder point when its reorder level is above
+zero and its units in stock are equal to or below the reorder level.
+
+If a product is at its reorder point and its units on order are zero,
+nothing is on the way. Purchasing must raise a purchase order with the
+supplier within 1 business day. Anyone who notices this situation should
+report it to purchasing@northwind.example.
+
+If a product is at its reorder point and its units on order are above
+zero, replenishment is already on the way and no action is needed.
+
+A reorder level of zero means the product is not replenished
+automatically. This applies to products that are bought only against
+customer demand and to all discontinued products. Discontinued products
+are covered by the Discontinued Product and Substitution Guide
+(NW-POL-003).
+
+Standard supplier lead times
+
+The lead time is counted in calendar days from the day the purchase
+order is raised to the day the goods arrive in Seattle. It depends on
+the country of the supplier.
+
+Suppliers in the USA and Canada: 7 days.
+Suppliers in Europe: 14 days.
+Suppliers in Japan, Singapore and Australia: 21 days.
+Suppliers in Brazil: 21 days.
+
+A supplier may announce a different lead time. The standard lead times
+above change only when the Purchasing Lead issues a new version of this
+policy.
+
+What delivery date staff may promise
+
+An order line can be confirmed from stock when the units in stock are
+equal to or higher than the quantity on the line.
+
+When the units in stock are lower than the quantity on the line, staff
+may promise a date equal to today, plus the standard lead time for the
+supplier's country, plus 2 days for receiving the goods in Seattle.
+This rule is used whether or not units are already on order, because it
+is the date Northwind can be sure of.
+
+Example: a product from a supplier in Italy is out of stock. The
+earliest date staff may promise is today plus 14 days plus 2 days, which
+is 16 days from today.
+
+This rule does not apply to discontinued products, which are never
+replenished.

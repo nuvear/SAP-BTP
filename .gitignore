@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Office / LibreOffice temp and lock files
+~$*
+.~lock.*#
+*.tmp
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Secrets - never commit
+.env
+.env.*
+*.pem
+*.key
+
+# Working copies of files that already live in data/northwind/instructor/
+Claude outputs/
+
+# Instructor answer key (fact sheet + 32-question evaluation set).
+# Kept out of the repo so the answers are not published by accident.
+# Delete the next line if this repo is instructor-only or private.
+data/northwind/instructor/

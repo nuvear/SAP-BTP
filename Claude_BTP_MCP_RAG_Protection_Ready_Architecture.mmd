@@ -1,0 +1,38 @@
+flowchart LR
+  U["Authorized Procurement User<br/>Enterprise SSO + MFA"] -->|"TLS • signed token"| E["BTP Edge<br/>API Gateway / App Router<br/>Rate limits • WAF • size limits"]
+  E --> A{"Authorization Gate<br/>Role + company + purchasing org<br/>Deny by default"}
+  A -->|"Denied"| X["Safe refusal<br/>Audit event"]
+  A -->|"Allowed"| W["LangGraph Safety Workflow<br/>Intent allow-list • injection scan<br/>data minimization • output validation"]
+
+  W --> R["Authorization-Aware RAG<br/>Approved procurement policies<br/>Current versions only"]
+  R --> V["Policy vector store<br/>Metadata ACL filters<br/>Classification • expiry • citations"]
+  V --> R
+
+  W --> M["Read-Only Procurement MCP Server<br/>Static tool allow-list • JSON schemas<br/>Server-side ABAC • audit"]
+  M --> D["BTP Destination Service<br/>Routing • short-lived credentials<br/>Managed authentication"]
+  D --> S["SAP Procurement APIs<br/>PO status • supplier risk<br/>No write access"]
+
+  R --> C["Claude<br/>Evidence-only answer drafting<br/>No approval authority"]
+  M --> C
+  C --> O["Response Validator<br/>Citations • DLP • prohibited-action check<br/>Abstain when evidence is insufficient"]
+  O --> U
+
+  W -.-> L["BTP Audit Log + SIEM<br/>Identity • authorization decision<br/>tool call • source IDs • outcome"]
+  M -.-> L
+  O -.-> L
+
+  classDef user fill:#0B192C,color:#FFFFFF,stroke:#0B192C,stroke-width:2px;
+  classDef gate fill:#EAB308,color:#0B192C,stroke:#B58900,stroke-width:2px;
+  classDef platform fill:#0F766E,color:#FFFFFF,stroke:#0F766E,stroke-width:2px;
+  classDef data fill:#EAF4F2,color:#0B192C,stroke:#0F766E,stroke-width:2px;
+  classDef model fill:#F3F0EA,color:#0B192C,stroke:#0B192C,stroke-width:2px;
+  classDef control fill:#FFF4DD,color:#0B192C,stroke:#EAB308,stroke-width:2px;
+  classDef deny fill:#FFF0ED,color:#A02A20,stroke:#FF6F61,stroke-width:2px;
+
+  class U user;
+  class E,W,M,D platform;
+  class A gate;
+  class R,V,S data;
+  class C model;
+  class O,L control;
+  class X deny;

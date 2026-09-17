@@ -1,0 +1,41 @@
+flowchart LR
+  U["Employee<br/>Chat page in the browser"]
+
+  subgraph BTP["SAP BTP"]
+    direction LR
+    A["App Router + XSUAA<br/>Signs the user in, issues a signed token"]
+    G["Agent app<br/>LangGraph on Cloud Foundry<br/>Plans the steps, calls the two servers,<br/>checks the answer before it goes out"]
+    H["Generative AI Hub · SAP AI Core<br/>On a trial account: the Claude API, called directly"]
+    P["Policy server · MCP · RAG<br/>search_policies"]
+    N["Northwind server · MCP · Live data<br/>get_order_status<br/>get_product_availability"]
+    C["CAP service<br/>OData + row rules per user"]
+    subgraph HANA["SAP HANA Cloud · one database, two uses"]
+      V["Vector store<br/>Policy documents as embeddings"]
+      T["Northwind tables<br/>Orders, products, customers"]
+    end
+    S["Platform services behind every step<br/>Role collections · Destination service · Audit trail<br/>(Audit Log service, or a HANA table on trial)"]
+  end
+
+  M["Claude<br/>Reads the evidence, drafts the answer<br/>Runs at the model provider, outside BTP"]
+
+  U -->|"1 Sign in"| A
+  A -->|"2 Question + user token"| G
+  G <-->|"3 Find policy passages the user may see"| P
+  P <--> V
+  G <-->|"4 Get live order and stock facts"| N
+  N <--> C
+  C <--> T
+  G <-->|"5 Question + evidence only"| H
+  H <-->|"SAP brokers the model call"| M
+  G -->|"6 Answer with sources and data time"| U
+
+  classDef client fill:#0B192C,color:#FFFFFF,stroke:#0B192C,stroke-width:2px;
+  classDef gate fill:#FFF4DD,color:#0B192C,stroke:#EAB308,stroke-width:3px;
+  classDef agent fill:#0F766E,color:#FFFFFF,stroke:#0F766E,stroke-width:2px;
+  classDef svc fill:#FFFFFF,color:#0B192C,stroke:#0F766E,stroke-width:2px;
+  classDef data fill:#FFFFFF,color:#0B192C,stroke:#0B192C,stroke-width:2px;
+  class U client;
+  class A gate;
+  class G agent;
+  class H,P,N,S svc;
+  class C,V,T,M data;
