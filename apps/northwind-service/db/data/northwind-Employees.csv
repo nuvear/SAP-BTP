@@ -1,0 +1,10 @@
+EmployeeID,LastName,FirstName,Title,ReportsTo_EmployeeID,City,Country
+1,Davolio,Nancy,Sales Representative,2,Seattle,USA
+2,Fuller,Andrew,"Vice President, Sales",,Tacoma,USA
+3,Leverling,Janet,Sales Representative,2,Kirkland,USA
+4,Peacock,Margaret,Sales Representative,2,Redmond,USA
+5,Buchanan,Steven,Sales Manager,2,London,UK
+6,Suyama,Michael,Sales Representative,5,London,UK
+7,King,Robert,Sales Representative,5,London,UK
+8,Callahan,Laura,Inside Sales Coordinator,2,Seattle,USA
+9,Dodsworth,Anne,Sales Representative,5,London,UK

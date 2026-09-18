@@ -1,0 +1,40 @@
+{
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.SalesHQ",
+      "description": "Read all orders"
+    },
+    {
+      "name": "$XSAPPNAME.SalesRegion",
+      "description": "Read orders of the user's own office country"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "country",
+      "description": "Office country of the user (USA or UK). Drives the row rule for SalesRegion.",
+      "valueType": "s",
+      "valueRequired": false
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "SalesHQ",
+      "description": "Head office sales: reads every order",
+      "scope-references": [
+        "$XSAPPNAME.SalesHQ"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "SalesRegion",
+      "description": "Regional sales: reads only orders of salespeople in the user's own country. Create one role per country from this template.",
+      "scope-references": [
+        "$XSAPPNAME.SalesRegion"
+      ],
+      "attribute-references": [
+        "country"
+      ]
+    }
+  ]
+}

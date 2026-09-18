@@ -1,0 +1,67 @@
+_schema-version: 3.3.0
+ID: northwind-service
+version: 0.1.0
+description: "Read-only CAP OData service over Northwind, with a row rule per user. Course material."
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+modules:
+  - name: northwind-service-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      memory: 256M
+      disk-quota: 512M
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: northwind-service-auth
+      - name: northwind-service-db
+
+  - name: northwind-service-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      memory: 256M
+      disk-quota: 512M
+      buildpack: nodejs_buildpack
+    requires:
+      - name: northwind-service-db
+
+resources:
+  - name: northwind-service-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: northwind-service-${org}-${space}
+        tenant-mode: dedicated
+        oauth2-configuration:
+          credential-types:
+            - "binding-secret"
+            - "x509"
+        role-collections:
+          - name: 'SalesHQ (northwind-service ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.SalesHQ'
+          # The SalesRegion role needs a value for the 'country' attribute, so it cannot be generated here.
+          # Create it in the BTP cockpit: see apps/DEPLOY.md, step 5.
+  - name: northwind-service-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared

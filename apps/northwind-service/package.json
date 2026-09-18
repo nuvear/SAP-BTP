@@ -1,0 +1,63 @@
+{
+  "name": "northwind-service",
+  "version": "0.1.0",
+  "description": "Read-only CAP OData service over Northwind, with a row rule per user. Course material.",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds watch",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@cap-js/hana": "^3",
+    "@sap/cds": "^10",
+    "@sap/xssec": "^4",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^3",
+    "@sap/cds-dk": "^10"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": ":memory:"
+        }
+      },
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "nancy": {
+            "password": "nancy",
+            "roles": [
+              "SalesHQ"
+            ],
+            "attr": {
+              "country": "USA"
+            }
+          },
+          "steven": {
+            "password": "steven",
+            "roles": [
+              "SalesRegion"
+            ],
+            "attr": {
+              "country": "UK"
+            }
+          },
+          "guest": {
+            "password": "guest",
+            "roles": []
+          }
+        }
+      },
+      "[production]": {
+        "db": "hana",
+        "auth": "xsuaa"
+      }
+    }
+  }
+}

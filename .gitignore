@@ -31,3 +31,11 @@ Claude outputs/
 # Kept out of the repo so the answers are not published by accident.
 # Delete the next line if this repo is instructor-only or private.
 data/northwind/instructor/
+
+# Build and dependency folders (apps/)
+node_modules/
+__pycache__/
+.pytest_cache/
+.venv/
+gen/
+mta_archives/
