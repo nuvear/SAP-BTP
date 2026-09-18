@@ -14,6 +14,10 @@ Raj Academy teaching material on governed AI on SAP BTP: Claude, MCP and RAG aro
 | `04. Governed_AI_on_SAP_BTP.pptx` / `.pdf` | Governed AI on SAP BTP (deck and PDF export) |
 | `data/northwind/` | Fictional Northwind RAG corpus for the labs. See `data/northwind/README.txt` |
 
+## Course materials
+
+`05. Course Materials/` holds the student workbook and the lab guide as interactive HTML pages in English (`English/`), Japanese (`Japanese/`) and Simplified Chinese (`Chinese/`), with the Markdown sources under `markdown/`. Start at `05. Course Materials/00_README.md`. The code for the labs is in `apps/` (data service, policy loader, MCP server, deployment guides, the lab conductor in `apps/lab/`). Instructor materials are not published in this repository.
+
 ## Lab data
 
 Everything under `data/northwind/` is fictional training data built on Microsoft's Northwind sample database.

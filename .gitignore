@@ -39,3 +39,12 @@ __pycache__/
 .venv/
 gen/
 mta_archives/
+
+# Course materials: instructor pages (runbook, demo script, answer key) and the Stage sources stay out of the public repo
+05. Course Materials/*/instructor/
+05. Course Materials/markdown/*/01_Session_Runbook.md
+05. Course Materials/markdown/*/02_Demo_Script.md
+05. Course Materials/markdown/*/05_Answer_Key.md
+05. Course Materials/tools/stage/
+apps/lab/logs/
+apps/lab/lab_journal.*

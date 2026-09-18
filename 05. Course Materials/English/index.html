@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" data-doc="Northwind_README" data-lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Course materials: Governed AI on SAP BTP</title>
+<style>
+:root{--ink:#1c2430;--muted:#5b6673;--line:#d9dee5;--bg:#fbfbf9;--card:#ffffff;--accent:#0a6ed1;--accent-ink:#ffffff;--ok:#2e7d32;--soft:#eef3f8;--code:#f4f5f7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans","Noto Sans JP","Noto Sans SC","Hiragino Sans","PingFang SC",Roboto,Helvetica,Arial,sans-serif}
+header.hb{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+header.hb .t{font-weight:700;margin-right:auto}
+header.hb .prog{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+header.hb .bar{width:140px;height:8px;background:var(--soft);border-radius:4px;overflow:hidden}
+header.hb .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .2s}
+header.hb button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:14px}
+header.hb button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+header.hb .langs a{margin-left:6px;font-size:14px;text-decoration:none;color:var(--accent)}
+header.hb .langs a.cur{font-weight:700;color:var(--ink)}
+main{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+.hint{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:14px;color:var(--muted);margin:0 0 18px}
+h1{font-size:30px;line-height:1.2;margin:.2em 0 .4em}h2{font-size:22px;margin:1.8em 0 .5em;padding-top:.4em;border-top:1px solid var(--line)}h3{font-size:18px}
+h1.part{margin-top:2.2em;font-size:24px;color:var(--accent)}
+p,li{max-width:72ch}
+a{color:var(--accent)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.92em;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#1f2937;color:#e5e7eb;padding:12px 14px;border-radius:8px;overflow-x:auto;position:relative;font-size:14px}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+pre .copy{position:absolute;top:6px;right:6px;font-size:12px;border:1px solid #4b5563;background:#374151;color:#e5e7eb;border-radius:5px;padding:2px 8px;cursor:pointer}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0 16px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--soft)}
+ul.tasks{list-style:none;padding-left:0}ul.tasks li{margin:6px 0;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);display:flex;gap:10px;align-items:flex-start}
+ul.tasks input{margin-top:5px;width:18px;height:18px;flex:none}
+ul.tasks li.done{background:#f1f8f1;border-color:#c8e6c9}ul.tasks li.done label{color:var(--muted);text-decoration:line-through}
+.box{margin:8px 0 16px}.box label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.box textarea{width:100%;min-height:72px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:inherit;font-size:15px;background:var(--card);resize:vertical}
+.box textarea:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+.notes textarea{min-height:56px;background:#fffdf3}
+details.key{border:1px dashed var(--line);border-radius:8px;padding:8px 14px;margin:12px 0}details.key summary{cursor:pointer;font-weight:600}
+.saved{font-size:13px;color:var(--muted)}
+footer{max-width:860px;margin:0 auto;padding:0 16px 40px;font-size:13px;color:var(--muted)}
+@media print{header.hb,.hint,pre .copy{display:none}body{background:#fff}main{max-width:none;padding:0}.box textarea{border:1px solid #999;min-height:40px}details.key{display:block}details.key[open] summary{display:none}}
+</style>
+<script type="application/json" id="hb-ui">{"progress": "Progress", "save": "Save my copy", "reset": "Clear everything", "print": "Print", "notes": "My notes", "answer": "My answer", "key": "Answer key (open when you have tried the exercises)", "saved": "Saved in this browser", "saved_file": "This file carries your saved answers from", "hint": "Tick boxes and type as you go. Your work stays in this browser; click Save my copy to download a file that keeps it.", "reset_confirm": "Clear all ticks and answers on this page?", "lang": "Language"}</script>
+<script type="application/json" id="hb-state"></script>
+</head>
+<body>
+<header class="hb">
+  <span class="t">Course materials: Governed AI on SAP BTP</span>
+  <span class="prog">Progress <span class="bar"><i id="hb-bar"></i></span> <span id="hb-count">0 / 0</span></span>
+  <span class="langs">Language: <a href="../English/index.html" class="cur">English</a> <a href="../Japanese/index.html" class="">日本語</a> <a href="../Chinese/index.html" class="">简体中文</a></span>
+  <button id="hb-print">Print</button>
+  <button id="hb-reset">Clear everything</button>
+  <button id="hb-save" class="primary">Save my copy</button>
+  <span id="hb-saved" class="saved"></span>
+</header>
+<main>
+<p class="hint">Tick boxes and type as you go. Your work stays in this browser; click Save my copy to download a file that keeps it.</p>
+<h1 id="course-materials-governed-ai-on-sap-btp">Course materials: Governed AI on SAP BTP</h1>
+<p>Raj Academy, hands-on course for SAP engineers. Everything in this folder exists in English, Japanese and Simplified Chinese; the code, commands, file names and citations are the same in all three.</p>
+<h2 id="for-students">For students</h2>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>03_Student_Workbook.html</code></td>
+<td>The hands-on workbook: Part A, the laptop lab (no SAP account), and Part B, your own SAP BTP trial tenant. Tick the tasks, type your answers and notes, and click "Save my copy" to download the filled-in file.</td>
+</tr>
+<tr>
+<td><code>04_Lab_Guide.html</code></td>
+<td>One section per lab: what each persona asks, what comes back, whether it is correct and why. Read after the session.</td>
+</tr>
+</tbody>
+</table>
+<p>Open the page in your language: <code>English/</code>, <code>Japanese/</code>, <code>Chinese/</code>. Every page has a language switch at the top; your ticks and answers are kept per browser and carry over between languages.</p>
+<p>The code lives at <a href="https://github.com/nuvear/SAP-BTP">https://github.com/nuvear/SAP-BTP</a>: <code>apps/</code> (data service, policy loader, MCP server, deployment guides, the lab conductor) and <code>data/northwind/</code> (the 11 policy documents and the 3 robustness documents).</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s1-notes"></textarea></div>
+
+<h2 id="for-the-instructor">For the instructor</h2>
+<p><code>instructor/</code> inside each language folder holds the Session Runbook (the one-day agenda mapped to the deck), the Demo Script (the live demo, question by question) and the Answer Key. These folders are excluded from the public repository by <code>.gitignore</code>. The deck is <code>../04. Governed_AI_on_SAP_BTP.pptx</code>; the in-session Stage page (one step at a time, with the lab diagrams and the recorded evidence) is a private Claude artifact.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s2-notes"></textarea></div>
+
+<h2 id="how-the-files-are-made">How the files are made</h2>
+<p><code>markdown/en</code>, <code>markdown/ja</code> and <code>markdown/zh</code> hold the sources. The English sources are snapshots of the live Claude Docs (the runbook, the demo script, the workbook and the lab guide); the translations were made from those snapshots. <code>tools/build_package.py</code> builds every HTML page from the sources with <code>tools/build_handbook.py</code>. After editing a live document, export it again and rebuild.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s3-notes"></textarea></div>
+</main>
+<footer>Raj Academy · Governed AI on SAP BTP · generated 2026-09-18 from 00_README.md</footer>
+<script>
+(function(){
+  const DOC = document.documentElement.dataset.doc, LANG = document.documentElement.dataset.lang;
+  const KEY = 'hb:' + DOC;                         // shared across languages: same keys, same ticks
+  const T = JSON.parse(document.getElementById('hb-ui').textContent);
+  const fields = () => Array.from(document.querySelectorAll('[data-key]'));
+  function collect(){ const s = {}; for (const el of fields()) { s[el.dataset.key] = el.type === 'checkbox' ? el.checked : el.value; } return s; }
+  function apply(s){ if (!s) return; for (const el of fields()) { if (!(el.dataset.key in s)) continue; if (el.type === 'checkbox') el.checked = !!s[el.dataset.key]; else el.value = s[el.dataset.key] || ''; } refresh(); }
+  function refresh(){
+    const boxes = Array.from(document.querySelectorAll('input[type=checkbox][data-key]'));
+    const done = boxes.filter(b => b.checked).length;
+    for (const b of boxes) b.closest('li').classList.toggle('done', b.checked);
+    const pct = boxes.length ? Math.round(100 * done / boxes.length) : 0;
+    document.querySelector('header.hb .prog').style.display = boxes.length ? '' : 'none';
+    document.getElementById('hb-bar').style.width = pct + '%';
+    document.getElementById('hb-count').textContent = done + ' / ' + boxes.length;
+  }
+  function persist(){ try { localStorage.setItem(KEY, JSON.stringify({at: new Date().toISOString(), state: collect()})); document.getElementById('hb-saved').textContent = T.saved + ' · ' + new Date().toLocaleTimeString(); } catch (e) {} }
+  function embedded(){ try { return JSON.parse(document.getElementById('hb-state').textContent || 'null'); } catch (e) { return null; } }
+  function saveCopy(){
+    const payload = {at: new Date().toISOString(), lang: LANG, state: collect()};
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelector('#hb-state').textContent = JSON.stringify(payload).replace(/<\//g, '<\\/');
+    for (const ta of clone.querySelectorAll('textarea[data-key]')) ta.textContent = payload.state[ta.dataset.key] || '';
+    for (const cb of clone.querySelectorAll('input[type=checkbox][data-key]')) { if (payload.state[cb.dataset.key]) cb.setAttribute('checked', ''); else cb.removeAttribute('checked'); }
+    const blob = new Blob(['<!doctype html>\n' + clone.outerHTML], {type: 'text/html'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = DOC + '_' + LANG + '_' + payload.at.slice(0, 10) + '.html'; document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  function reset(){ if (!confirm(T.reset_confirm)) return; for (const el of fields()) { if (el.type === 'checkbox') el.checked = false; else el.value = ''; } try { localStorage.removeItem(KEY); } catch (e) {} refresh(); document.getElementById('hb-saved').textContent = ''; }
+  document.addEventListener('DOMContentLoaded', () => {
+    const emb = embedded(); let local = null; try { local = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+    if (emb && emb.state) { apply(emb.state); document.getElementById('hb-saved').textContent = T.saved_file + ' ' + new Date(emb.at).toLocaleString(); }
+    else if (local && local.state) { apply(local.state); document.getElementById('hb-saved').textContent = T.saved + ' · ' + new Date(local.at).toLocaleString(); }
+    else refresh();
+    document.addEventListener('input', e => { if (e.target.dataset && e.target.dataset.key) { refresh(); persist(); } });
+    document.getElementById('hb-save').addEventListener('click', saveCopy);
+    document.getElementById('hb-reset').addEventListener('click', reset);
+    document.getElementById('hb-print').addEventListener('click', () => window.print());
+    for (const pre of document.querySelectorAll('pre')) { const b = document.createElement('button'); b.className = 'copy'; b.textContent = 'copy'; b.addEventListener('click', () => { navigator.clipboard.writeText(pre.querySelector('code').textContent).then(() => { b.textContent = 'copied'; setTimeout(() => b.textContent = 'copy', 1200); }); }); pre.appendChild(b); }
+  });
+})();
+</script>
+</body>
+</html>

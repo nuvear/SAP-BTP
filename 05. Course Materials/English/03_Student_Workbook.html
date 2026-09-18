@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en" data-doc="Northwind_Workbook" data-lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Northwind Advisor Student Workbook</title>
+<style>
+:root{--ink:#1c2430;--muted:#5b6673;--line:#d9dee5;--bg:#fbfbf9;--card:#ffffff;--accent:#0a6ed1;--accent-ink:#ffffff;--ok:#2e7d32;--soft:#eef3f8;--code:#f4f5f7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans","Noto Sans JP","Noto Sans SC","Hiragino Sans","PingFang SC",Roboto,Helvetica,Arial,sans-serif}
+header.hb{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+header.hb .t{font-weight:700;margin-right:auto}
+header.hb .prog{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+header.hb .bar{width:140px;height:8px;background:var(--soft);border-radius:4px;overflow:hidden}
+header.hb .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .2s}
+header.hb button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:14px}
+header.hb button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+header.hb .langs a{margin-left:6px;font-size:14px;text-decoration:none;color:var(--accent)}
+header.hb .langs a.cur{font-weight:700;color:var(--ink)}
+main{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+.hint{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:14px;color:var(--muted);margin:0 0 18px}
+h1{font-size:30px;line-height:1.2;margin:.2em 0 .4em}h2{font-size:22px;margin:1.8em 0 .5em;padding-top:.4em;border-top:1px solid var(--line)}h3{font-size:18px}
+h1.part{margin-top:2.2em;font-size:24px;color:var(--accent)}
+p,li{max-width:72ch}
+a{color:var(--accent)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.92em;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#1f2937;color:#e5e7eb;padding:12px 14px;border-radius:8px;overflow-x:auto;position:relative;font-size:14px}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+pre .copy{position:absolute;top:6px;right:6px;font-size:12px;border:1px solid #4b5563;background:#374151;color:#e5e7eb;border-radius:5px;padding:2px 8px;cursor:pointer}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0 16px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--soft)}
+ul.tasks{list-style:none;padding-left:0}ul.tasks li{margin:6px 0;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);display:flex;gap:10px;align-items:flex-start}
+ul.tasks input{margin-top:5px;width:18px;height:18px;flex:none}
+ul.tasks li.done{background:#f1f8f1;border-color:#c8e6c9}ul.tasks li.done label{color:var(--muted);text-decoration:line-through}
+.box{margin:8px 0 16px}.box label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.box textarea{width:100%;min-height:72px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:inherit;font-size:15px;background:var(--card);resize:vertical}
+.box textarea:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+.notes textarea{min-height:56px;background:#fffdf3}
+details.key{border:1px dashed var(--line);border-radius:8px;padding:8px 14px;margin:12px 0}details.key summary{cursor:pointer;font-weight:600}
+.saved{font-size:13px;color:var(--muted)}
+footer{max-width:860px;margin:0 auto;padding:0 16px 40px;font-size:13px;color:var(--muted)}
+@media print{header.hb,.hint,pre .copy{display:none}body{background:#fff}main{max-width:none;padding:0}.box textarea{border:1px solid #999;min-height:40px}details.key{display:block}details.key[open] summary{display:none}}
+</style>
+<script type="application/json" id="hb-ui">{"progress": "Progress", "save": "Save my copy", "reset": "Clear everything", "print": "Print", "notes": "My notes", "answer": "My answer", "key": "Answer key (open when you have tried the exercises)", "saved": "Saved in this browser", "saved_file": "This file carries your saved answers from", "hint": "Tick boxes and type as you go. Your work stays in this browser; click Save my copy to download a file that keeps it.", "reset_confirm": "Clear all ticks and answers on this page?", "lang": "Language"}</script>
+<script type="application/json" id="hb-state"></script>
+</head>
+<body>
+<header class="hb">
+  <span class="t">Northwind Advisor Student Workbook</span>
+  <span class="prog">Progress <span class="bar"><i id="hb-bar"></i></span> <span id="hb-count">0 / 0</span></span>
+  <span class="langs">Language: <a href="../English/03_Student_Workbook.html" class="cur">English</a> <a href="../Japanese/03_Student_Workbook.html" class="">日本語</a> <a href="../Chinese/03_Student_Workbook.html" class="">简体中文</a></span>
+  <button id="hb-print">Print</button>
+  <button id="hb-reset">Clear everything</button>
+  <button id="hb-save" class="primary">Save my copy</button>
+  <span id="hb-saved" class="saved"></span>
+</header>
+<main>
+<p class="hint">Tick boxes and type as you go. Your work stays in this browser; click Save my copy to download a file that keeps it.</p>
+<h1 id="northwind-advisor-student-workbook">Northwind Advisor Student Workbook</h1>
+<p>Raj Academy · 18 September 2026</p>
+<p>Hands-on companion to the Governed AI on SAP BTP session, in two parts. Part A runs on your own laptop from the public repository: no SAP BTP account, no API key and no password is needed; plan about ninety minutes. Part B builds the same advisor on your own free SAP BTP trial account with real SAP sign-in, the way the instructor's demo runs; plan about four hours. Bring: a laptop with admin rights, Node.js 20+, Python 3.11+, git; for Part B also a phone for the SAP verification code and, optionally, a Claude account.</p>
+<h1 class="part" id="part-a-laptop-lab">Part A: laptop lab</h1>
+<h2 id="what-you-will-build">What you will build</h2>
+<p>You will run the same three pieces you saw in the demo on your own machine: the Northwind data service with its row rule, the policy store with its document filter, and the MCP server with its three read-only tools. Instead of an SAP sign-in you get two built-in test users, and instead of Claude you use the MCP Inspector, a small web page that lets you call tools by hand and see exactly what comes back. That is the point of the workbook: to see the raw answers before a model turns them into prose.</p>
+<table>
+<thead>
+<tr>
+<th>Test user</th>
+<th>Office</th>
+<th>Role</th>
+<th>Orders they may read</th>
+<th>Documents they may read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nancy</code></td>
+<td>Seattle</td>
+<td>SalesHQ</td>
+<td>all 830</td>
+<td>all-staff, sales, sales-seattle</td>
+</tr>
+<tr>
+<td><code>steven</code></td>
+<td>London</td>
+<td>SalesRegion, country UK</td>
+<td>the 224 orders of UK salespeople</td>
+<td>all-staff, sales, sales-london</td>
+</tr>
+</tbody>
+</table>
+<p>The lab date is frozen at 7 May 2026, because the sample data ends on 6 May 2026. Whenever a rule says "today", it means that date.</p>
+<p>You need: Node.js 20 or later, Python 3.11 or later, git, and a browser. Check with <code>node --version</code>, <code>python3 --version</code>, <code>git --version</code>. Windows users: use PowerShell or WSL; the commands below are written for a Unix-style shell and are noted where PowerShell differs.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s1-notes"></textarea></div>
+
+<h2 id="setup-three-terminals-about-20-minutes">Setup: three terminals, about 20 minutes</h2>
+<p>Get the code once:</p>
+<pre><code class="language-bash">git clone https://github.com/nuvear/SAP-BTP.git
+cd SAP-BTP/apps
+</code></pre>
+<p><strong>Terminal 1, the data service.</strong> This is the SAP CAP service that owns the orders and the row rule. Locally it uses an in-memory database and two mocked users.</p>
+<pre><code class="language-bash">cd northwind-service
+npm ci
+npm test
+npm start
+</code></pre>
+<p><code>npm test</code> must end with <code># pass 9</code> and <code># fail 0</code>. <code>npm start</code> prints a line containing <code>http://localhost:4004</code> followed by <code>server ... launched</code>; a warning that SQLite is experimental is normal. Leave it running. Open <a href="http://localhost:4004/odata/v4/northwind/Orders?$top=3">http://localhost:4004/odata/v4/northwind/Orders?$top=3</a> in a browser: it asks for a user; type <code>nancy</code> and password <code>nancy</code> and you see three orders as JSON. That is what the assistant reads.</p>
+<p><strong>Terminal 2, the MCP server.</strong> It offers the three tools and, locally, uses a keyword search over the 86 policy passages already in the repository (<code>policy-loader/chunks.jsonl</code>).</p>
+<pre><code class="language-bash">cd mcp-servers
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m pytest -q
+DEV_MODE=1 DEV_USER=nancy LAB_TODAY=2026-05-07 python server.py advisor
+</code></pre>
+<p><code>pytest</code> must say 45 passed (a few deprecation warnings are normal; it starts its own copy of the data service on another port, so Terminal 1 does not interfere). The last command prints <code>Uvicorn running on http://0.0.0.0:8000</code>. It does not echo which user you chose, so check the variable before you start it. On PowerShell, activate with <code>.venv\Scripts\Activate.ps1</code> and set the variables with <code>$env:DEV_MODE="1"; $env:DEV_USER="nancy"; $env:LAB_TODAY="2026-05-07"</code> before <code>python server.py advisor</code>.</p>
+<p>What <code>DEV_MODE=1</code> means: on your laptop there is no SAP sign-in, so the server takes the user from <code>DEV_USER</code>. On BTP this switch does not exist; the server refuses every call without a valid SAP token. Never deploy with it.</p>
+<p><strong>Terminal 3, the MCP Inspector.</strong> This is your window into the tools.</p>
+<pre><code class="language-bash">npx @modelcontextprotocol/inspector
+</code></pre>
+<p>It opens a browser page. Choose transport <strong>Streamable HTTP</strong>, URL <code>http://localhost:8000/mcp</code>, click <strong>Connect</strong>, then <strong>List Tools</strong>. You should see <code>get_order_status</code>, <code>get_product_availability</code> and <code>search_policies</code>. If Connect fails, check that Terminal 2 is still running and that the URL ends in <code>/mcp</code>.</p>
+<p>To become Steven later, stop the server in Terminal 2 with Ctrl+C and start it again with <code>DEV_USER=steven</code>, then click Connect again in the Inspector. (Alternative without restarting: in the Inspector, add a custom header <code>X-Dev-User: steven</code>; the header wins over the variable.)</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s2-notes"></textarea></div>
+
+<h2 id="exercise-1-live-facts-and-the-row-rule-15-minutes">Exercise 1: live facts and the row rule (15 minutes)</h2>
+<p>In the Inspector, select <code>get_order_status</code>, enter <code>order_id</code> = <code>11019</code>, click Run Tool.</p>
+<ul class="tasks">
+<li><input type="checkbox" id="t1" data-key="t1"><label for="t1">Write down: customer, salesperson and their office country, required date, <code>days_until_required</code>, carrier, and the two product lines with their stock. Note <code>data_read_at</code>: every fact carries the time it was read.</label></li>
+<li><input type="checkbox" id="t2" data-key="t2"><label for="t2">Run it again with <code>11070</code>. Salesperson Andrew Fuller, USA office. Note <code>days_until_required</code>.</label></li>
+<li><input type="checkbox" id="t3" data-key="t3"><label for="t3">Now become Steven (restart Terminal 2 with <code>DEV_USER=steven</code>, reconnect). Run <code>get_order_status</code> for <code>11019</code> and for <code>11070</code>.</label></li>
+</ul>
+<p>What you should see: as Steven, 11019 comes back (its salesperson is in the UK office) and 11070 answers <code>found: false</code>, "No order with this number is visible to you." The MCP server did not decide this. It sent the same request to the data service with a different user, and the data service's row rule answered. Look in Terminal 1: both requests are logged, and the second one is followed by <code>404 - Error: Not Found</code>.</p>
+<p>Why the wording matters. Before any tool existed, a model asked about order 11019 would still have answered, confidently, from patterns learned in training; order 11019 exists only in this lab's database, so that answer would have been fabricated (a hallucination). Every value you see here was read from a row at the moment of the call, and <code>data_read_at</code> says when. Grounding replaces fabrication with retrieval.</p>
+<ul class="tasks">
+<li><input type="checkbox" id="t4" data-key="t4"><label for="t4">Try <code>get_product_availability</code> with <code>Rössle Sauerkraut</code> and with <code>Chai</code>. One is discontinued with stock left; one is a normal product. Which fields tell you?</label></li>
+</ul>
+<p>Question to answer in one sentence: why does the server say "not visible to you" instead of "does not exist" or "you are not allowed"? (Write your answer below; the instructor has the answer key.)</p>
+<div class="box"><label>My answer</label><textarea data-key="q1"></textarea></div>
+
+<div class="box notes"><label>My notes</label><textarea data-key="s3-notes"></textarea></div>
+
+<h2 id="exercise-2-rules-with-citations-15-minutes">Exercise 2: rules with citations (15 minutes)</h2>
+<p>Back as Nancy. Select <code>search_policies</code>; leave <code>k</code> at 4.</p>
+<ul class="tasks">
+<li><input type="checkbox" id="t5" data-key="t5"><label for="t5">Question: <code>How much discount can I give a customer on my own authority?</code> Read the <code>citation</code> of each passage returned. Which document and version give the answer, and what is the number?</label></li>
+<li><input type="checkbox" id="t6" data-key="t6"><label for="t6">Look at <code>data/northwind/robustness/</code> in the repository. Open the superseded Discount Authority Policy 1.0 and the draft memo about the spring campaign. What limits do they state? Were they returned? Why not? (Hint: every passage in <code>policy-loader/chunks.jsonl</code> carries <code>status</code>, <code>effective_from</code>, <code>effective_to</code> and an <code>audience</code>; the tool result shows the first three. <code>search_policies</code> only searches passages that are current, in force on the lab date, and readable by you.)</label></li>
+<li><input type="checkbox" id="t7" data-key="t7"><label for="t7">Question: <code>customer wants a rush job, is that allowed?</code> The passages contain no phrase "rush job". Which passage explains how the search still found the right rule? (Look for the glossary.)</label></li>
+<li><input type="checkbox" id="t8" data-key="t8"><label for="t8">Question: <code>Which carrier may carry seafood?</code> Then combine with Exercise 1: order 11019 has a seafood line on carrier 3. What should happen to that order, who pays, and who approves? Cite the section.</label></li>
+</ul>
+<p>A note on how the search works locally versus on BTP. On your laptop the search is by keywords (BM25); it finds the glossary entry because the words match. On BTP the same question is embedded by SAP HANA's built-in function and compared by meaning; there the passage about expediting comes first even though it shares no words with the question. The filter is identical in both: it is applied before ranking, in the <code>WHERE</code> clause on HANA and in the function <code>visible()</code> locally.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s4-notes"></textarea></div>
+
+<h2 id="exercise-3-identity-decides-10-minutes">Exercise 3: identity decides (10 minutes)</h2>
+<p>The same question, two people.</p>
+<ul class="tasks">
+<li><input type="checkbox" id="t9" data-key="t9"><label for="t9">As Nancy: <code>search_policies</code> with <code>How far are we prepared to go on the QUICK-Stop contract discount?</code> Write down the citations. Is there a negotiating figure anywhere in them?</label></li>
+<li><input type="checkbox" id="t10" data-key="t10"><label for="t10">Become Steven and ask exactly the same question. Now a memo from the London Sales Manager appears: which document id, which section, and what figure does it contain?</label></li>
+<li><input type="checkbox" id="t11" data-key="t11"><label for="t11">Look at the memo file in <code>data/northwind/corpus/</code>. Find the line that restricts it. Then open <code>apps/mcp-servers/identity.py</code> and find where Nancy's and Steven's document audiences are defined for local use.</label></li>
+</ul>
+<p>What to notice: Nancy is not told that something is hidden from her. The assistant answers from what it can see, and what it can see is decided by the audience list attached to her identity, never by the question. On BTP that list is derived from the SAP role collections and the <code>country</code> attribute in the sign-in token (<code>apps/mcp-servers/xsuaa.py</code>, function <code>audiences_for</code>); locally it comes from the two test users.</p>
+<p>Declared, not proven. On the laptop nobody signs in: <code>DEV_USER</code> (or the <code>X-Dev-User</code> header) names the user, <code>DEV_USERS</code> in <code>identity.py</code> gives that name its document audiences and its basic-auth login for the data service, and the data service's mocked users in <code>package.json</code> give that login its role and country. Anyone can type <code>DEV_USER=steven</code> and become Steven. That is why the switch does not exist on BTP: there the same two facts, role and country, arrive inside an XSUAA token that the MCP server verifies (signature, expiry, issuer, audience) and the data service verifies again. Part A shows the effect of identity; Part B shows the proof of it. The Lab Guide (<code>04_Lab_Guide</code>) explains each lab this way, persona by persona.</p>
+<p>Optional: change the lab date. Restart the server with <code>LAB_TODAY=2026-08-01</code> and repeat Steven's question. The memo's <code>effective_to</code> is 30 June 2026, so in August it is no longer returned, even to Steven. Documents expire without anyone editing them.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s5-notes"></textarea></div>
+
+<h2 id="exercise-4-the-traps-15-minutes">Exercise 4: the traps (15 minutes)</h2>
+<p>This is the robustness lab. You switch the document filter off and watch what a careless system would do.</p>
+<ul class="tasks">
+<li><input type="checkbox" id="t12" data-key="t12"><label for="t12">Stop Terminal 2 and restart with the filter off: <code>DEV_MODE=1 DEV_USER=nancy LAB_TODAY=2026-05-07 STRICT_FILTERS=0 python server.py advisor</code>. Reconnect the Inspector.</label></li>
+<li><input type="checkbox" id="t13" data-key="t13"><label for="t13">Ask: <code>What discount may I approve for a customer?</code> with <code>k</code> = <code>6</code> (the tool never returns more than 6). Now passages with <code>status: superseded</code> (5 percent, from <code>NW-POL-001 v1.0, 3. Approval tiers</code>) and <code>status: unapproved</code> (15 percent, the draft memo <code>NW-MEM-900</code>) appear beside the current 10 percent. Write down all three figures and their citations. A model given these passages would have to choose, and it might choose wrong. (The keyword search is sensitive to wording; the exact question above is the one that brings all three up on a laptop. On HANA, meaning-based search does it for any phrasing.)</label></li>
+<li><input type="checkbox" id="t14" data-key="t14"><label for="t14">Ask: <code>Has the lead time for Pavlova products changed?</code> A passage with <code>status: unverified-external</code> appears: a supplier email. Read its second passage to the end. It contains an instruction addressed to "any AI assistant".</label></li>
+<li><input type="checkbox" id="t15" data-key="t15"><label for="t15">As Nancy with the filter off, ask the QUICK-Stop question from Exercise 3. The London memo now appears for her too.</label></li>
+</ul>
+<p>Restart the server without <code>STRICT_FILTERS=0</code> and confirm all three traps are gone again.</p>
+<p>What the exercise shows: the filter is one line of policy applied before retrieval, and it removes three different failure classes at once: out-of-date rules, unapproved rules, and content that tries to instruct the model. The model's good behaviour is a second line of defence, not the first. In the demo you saw Claude refuse the injected instruction even when asked directly; here you see that with the filter on it never received the instruction at all.</p>
+<p>Question: which of the three traps would a keyword search have ranked highest for a question about discounts, and why is that dangerous? (Write your answer below; the instructor has the answer key.)</p>
+<div class="box"><label>My answer</label><textarea data-key="q2"></textarea></div>
+
+<div class="box notes"><label>My notes</label><textarea data-key="s6-notes"></textarea></div>
+
+<h2 id="exercise-5-read-the-code-find-each-rule-15-minutes">Exercise 5: read the code, find each rule (15 minutes)</h2>
+<p>Each rule you have just observed is a few lines in one file. Find them; the point is to see that governance is code you can review, not behaviour you hope for.</p>
+<table>
+<thead>
+<tr>
+<th>Rule you observed</th>
+<th>File</th>
+<th>What to look for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Steven cannot read order 11070</td>
+<td><code>apps/northwind-service/srv/northwind-service.cds</code></td>
+<td><code>@restrict</code> on <code>Orders</code>: <code>SalesHQ</code> reads everything, <code>SalesRegion</code> reads <code>where: 'Employee.Country = $user.country'</code>. Also <code>@readonly</code>: there is no write at all.</td>
+</tr>
+<tr>
+<td>Superseded, unapproved, expired and restricted passages never appear</td>
+<td><code>apps/mcp-servers/stores.py</code></td>
+<td>function <code>visible()</code>: four conditions, applied before ranking</td>
+</tr>
+<tr>
+<td>The same four conditions on SAP HANA</td>
+<td><code>apps/mcp-servers/hana_store.py</code></td>
+<td>the <code>SEARCH</code> statement: <code>WHERE STATUS = 'current' AND ... AUDIENCE IN (...)</code>, before <code>ORDER BY SCORE</code></td>
+</tr>
+<tr>
+<td>Only three tools, all read-only</td>
+<td><code>apps/mcp-servers/server.py</code></td>
+<td>function <code>build()</code>: three <code>@mcp.tool()</code> functions and nothing else; no generic query tool</td>
+</tr>
+<tr>
+<td>Who the user is, locally</td>
+<td><code>apps/mcp-servers/identity.py</code></td>
+<td><code>DEV_USERS</code>, and the line that refuses everything when <code>DEV_MODE</code> is not <code>1</code></td>
+</tr>
+<tr>
+<td>Who the user is, on BTP</td>
+<td><code>apps/mcp-servers/xsuaa.py</code></td>
+<td><code>verify_token</code>: signature, expiry, issuer, audience, in that order; <code>audiences_for</code>: role scopes and the <code>country</code> attribute become document audiences</td>
+</tr>
+<tr>
+<td>The server cannot start open on BTP</td>
+<td><code>apps/mcp-servers/server.py</code></td>
+<td>function <code>auth_config()</code>: <code>SystemExit</code> when there is no XSUAA binding and no <code>DEV_MODE</code></td>
+</tr>
+<tr>
+<td>Text in a passage is data, not a command</td>
+<td><code>apps/mcp-servers/policy_tools.py</code> and <code>server.py</code></td>
+<td>the <code>note</code> field in every search result, and the <code>INSTRUCTIONS</code> text given to the model</td>
+</tr>
+</tbody>
+</table>
+<ul class="tasks">
+<li><input type="checkbox" id="t16" data-key="t16"><label for="t16">Change one thing and watch a test fail: in <code>stores.py</code>, make <code>visible()</code> return <code>True</code> for superseded passages, run <code>python -m pytest -q</code>, and read which tests fail and what they say. Put it back.</label></li>
+<li><input type="checkbox" id="t17" data-key="t17"><label for="t17">Read <code>tests/test_xsuaa.py</code>. It creates a fake SAP token signed with a local key and shows each of the four validation rules refusing a bad token. Which test would catch a token stolen from a different SAP application?</label></li>
+</ul>
+<div class="box notes"><label>My notes</label><textarea data-key="s7-notes"></textarea></div>
+
+<h2 id="going-further">Going further</h2>
+<p><strong>Talk to it in Claude Desktop instead of the Inspector.</strong> Claude Desktop can run a local MCP server directly. Edit its configuration file (Claude Desktop &gt; Settings &gt; Developer &gt; Edit Config) and add an entry like this, with your own paths; keep Terminal 1 running.</p>
+<pre><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;northwind-local&quot;: {
+      &quot;command&quot;: &quot;/full/path/to/SAP-BTP/apps/mcp-servers/.venv/bin/python&quot;,
+      &quot;args&quot;: [&quot;/full/path/to/SAP-BTP/apps/mcp-servers/server.py&quot;, &quot;advisor&quot;, &quot;--stdio&quot;],
+      &quot;env&quot;: {
+        &quot;DEV_MODE&quot;: &quot;1&quot;,
+        &quot;DEV_USER&quot;: &quot;nancy&quot;,
+        &quot;LAB_TODAY&quot;: &quot;2026-05-07&quot;,
+        &quot;NORTHWIND_SERVICE_URL&quot;: &quot;http://localhost:4004/odata/v4/northwind&quot;,
+        &quot;POLICY_CHUNKS&quot;: &quot;/full/path/to/SAP-BTP/apps/policy-loader/chunks.jsonl&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<p>Restart Claude Desktop and ask the four demo questions. Change <code>DEV_USER</code> to <code>steven</code>, restart, and ask them again. You now have the full demo on your laptop, with Claude writing the prose.</p>
+<p><strong>Deploy it to your own SAP BTP trial account.</strong> This is the second half of the course, about half a day. The steps are in the repository: <code>apps/DEPLOY.md</code> (HANA Cloud instance with the natural-language-processing option, the data service, the role collections) and <code>apps/DEPLOY-MCP.md</code> (the MCP server with SAP sign-in and the Claude connector). Two things learned the hard way are already written into them: pin <code>mcp&lt;2</code> in <code>requirements.txt</code>, and type the <code>cf cups</code> values one at a time. <code>apps/phase0/hana_checks.sql</code> verifies that your HANA instance can embed text before you load anything.</p>
+<p><strong>Bring your own documents.</strong> Put a <code>.txt</code> or <code>.pdf</code> in <code>data/northwind/corpus/</code>, add it to <code>manifest.json</code> with a status, effective dates and an audience, run <code>python loader.py --data ../../data/northwind --out chunks.jsonl</code> in <code>apps/policy-loader</code>, and restart the server. Your document is now searchable, under the same filter as everything else. Try giving it <code>"status": "draft"</code> and watch it stay invisible.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s8-notes"></textarea></div>
+
+<h2 id="reflection">Reflection</h2>
+<p>Reflection, to discuss in your team:</p>
+<ol>
+<li>Which of the four rules (rows, documents, tools, identity) would your own organisation find hardest to express as code, and where does it live today?<div class="box"><label>My answer</label><textarea data-key="r1"></textarea></div></li>
+<li>The assistant said "this information is not available to you" to Nancy. Should it say that a restricted document exists? What would change if it did?<div class="box"><label>My answer</label><textarea data-key="r2"></textarea></div></li>
+<li>The filter uses status, effective dates and audience. Which other document properties would matter for your policies, and who would maintain them?<div class="box"><label>My answer</label><textarea data-key="r3"></textarea></div></li>
+<li>If you replaced Claude with another model, which of the behaviours you saw would change, and which are guaranteed by the platform regardless of the model?<div class="box"><label>My answer</label><textarea data-key="r4"></textarea></div></li>
+</ol>
+<h1 class="part" id="part-b-your-own-sap-btp-tenant">Part B: your own SAP BTP tenant</h1>
+<p>In Part A everything ran on your laptop with two test users. In Part B you build the same advisor on a free SAP BTP trial account with real SAP sign-in, exactly as the instructor's demo. Six sections, about four hours in total, in this order; each ends with a check you can see on screen. Region: choose <strong>Singapore (Azure)</strong> so that every address in this handbook matches yours; other regions work, with different host names.</p>
+<p>What you type into SAP screens stays with you: the DBADMIN password, the POLICY_READER password, and the connector's client secret. Never put any of them in a file in the repository, a chat, or a screenshot.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s9-notes"></textarea></div>
+
+<h2 id="1-create-the-trial-account-15-minutes">1. Create the trial account (15 minutes)</h2>
+<ol>
+<li>Open <a href="https://account.hanatrial.ondemand.com">https://account.hanatrial.ondemand.com</a> and click <strong>Get started</strong> (or <strong>Register</strong> if you have no SAP Universal ID). Fill in name, email and a password; SAP sends a verification code to the email. Enter it.</li>
+<li>Sign in. Accept the trial terms. SAP asks for a mobile number and sends a code by SMS; enter it. (One trial per Universal ID; if you already have one, this step takes you straight to it.)</li>
+<li>Choose the region <strong>Singapore - Azure</strong> and confirm. A page shows the account being set up; it takes about a minute.</li>
+<li>Click <strong>Go To Your Trial Account</strong>. You are in the BTP cockpit, in your global account (its name ends in <code>trial</code>). Click the subaccount tile <strong>trial</strong>.</li>
+<li>On the subaccount Overview, read the Cloud Foundry Environment box: API endpoint <code>https://api.cf.ap21.hana.ondemand.com</code>, an org name ending in <code>trial</code>, and further down one space called <code>dev</code>. Write the org name on your sheet; you will need it for <code>cf target</code>.</li>
+<li>In the left menu click <strong>Entitlements</strong>. Find SAP HANA Cloud: plans <code>hana-free</code> and <code>tools</code> are listed. SAP AI Core is not, which is why this course calls Claude directly (deck slide 14).</li>
+</ol>
+<p>Check: the Overview page with your API endpoint and org name.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s10-notes"></textarea></div>
+
+<h2 id="2-prepare-the-environment-60-minutes-including-waiting">2. Prepare the environment (60 minutes, including waiting)</h2>
+<p>Do the steps in this order. The first two must come before the database, or the database screens will not open.</p>
+<p><strong>2a. The SAP HANA Cloud tools subscription.</strong> Left menu <strong>Instances and Subscriptions</strong> &gt; <strong>Create</strong>. Service: type <code>SAP HANA Cloud</code> and pick it; Plan: <code>tools</code> (under Subscriptions, not Instances). Click <strong>Create</strong>. The Subscriptions list shows it as Processing, then Subscribed (about a minute).</p>
+<p><strong>2b. Your role collections.</strong> Left menu <strong>Security &gt; Users</strong>, click your user, tab <strong>Role Collections</strong>, then the <strong>...</strong> menu &gt; <strong>Assign Role Collection</strong>. Type <code>HANA</code> in the search, tick <strong>SAP HANA Cloud Administrator</strong> and <strong>SAP HANA Cloud Security Administrator</strong>, click Assign. Sign out of the cockpit and in again so the new roles take effect.</p>
+<p><strong>2c. The database instance.</strong> Left menu <strong>Instances and Subscriptions</strong> &gt; <strong>Create</strong>. Service <code>SAP HANA Cloud</code>, Plan <code>hana-free</code> (under Instances), Runtime Environment <strong>Cloud Foundry</strong>, Space <code>dev</code>. Click <strong>Next</strong> or <strong>Create</strong>; SAP HANA Cloud Central opens with a wizard.</p>
+<ul>
+<li>Instance name: <code>northwind-hana</code>. Administrator password: choose one now and save it in your password manager as "DBADMIN northwind-hana" (at least 8 characters, upper case, lower case, a digit).</li>
+<li>Keep the free-tier size (16 GB memory, 80 GB storage).</li>
+<li><strong>Advanced Settings</strong>: under Allowed connections choose <strong>Allow all IP addresses</strong>; under Additional Features switch on <strong>Natural Language Processing (NLP)</strong>. This cannot be added later; an instance without it has to be deleted and recreated.</li>
+<li>Review and <strong>Create Instance</strong>. Creation takes 5 to 10 minutes; the instance shows Creating, then Running.</li>
+</ul>
+<p>If the wizard did not ask for a password (some paths create the instance with a generated one), open the instance in HANA Cloud Central, use the <strong>...</strong> menu &gt; <strong>Reset DBADMIN Password</strong>, set a temporary one, and change it at your first sign-in.</p>
+<p><strong>2d. Phase 0: does the database do what we need?</strong> In HANA Cloud Central, on your instance choose <strong>Open &gt; Open in SQL Console</strong>. If asked, register with user <code>DBADMIN</code> and your password. Open <code>apps/phase0/hana_checks.sql</code> from the repository and run the seven blocks one at a time (paste a block, click <strong>Run</strong>). Block 4 is the one that matters: it must return <strong>768</strong>. Block 6 must return <code>expedite</code> first and neither <code>old-discount</code> nor <code>london-memo</code>. Block 7 drops the test table.</p>
+<p>Check: <code>northwind-hana</code> is Running with NLP Enabled (Configuration tab), and block 4 returned 768.</p>
+<p>Daily habit from now on: trial instances stop every night. Before each session open HANA Cloud Central and click <strong>Start</strong> on the instance.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s11-notes"></textarea></div>
+
+<h2 id="3-tools-on-your-laptop-and-sign-in-15-minutes">3. Tools on your laptop and sign-in (15 minutes)</h2>
+<p>You need the Cloud Foundry command line, its deployment plugin, and the MTA build tool. On a Mac with Homebrew:</p>
+<pre><code class="language-bash">brew install cloudfoundry/tap/cf-cli@8
+cf install-plugin multiapps
+npm install -g mbt
+</code></pre>
+<p>On Windows, install the cf CLI from the Cloud Foundry GitHub releases page, then run the same <code>cf install-plugin</code> and <code>npm install -g mbt</code> in PowerShell. Check with <code>cf --version</code> and <code>mbt --version</code>.</p>
+<p>Sign in with your browser (no password on the command line):</p>
+<pre><code class="language-bash">cf login --sso -a https://api.cf.ap21.hana.ondemand.com
+</code></pre>
+<p>It prints a link; open it, sign in, copy the temporary code back into the terminal. Then point at your org and space, using the org name from your sheet:</p>
+<pre><code class="language-bash">cf target -o &lt;your org name&gt; -s dev
+</code></pre>
+<p>Check: <code>cf target</code> shows your org and space <code>dev</code>.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s12-notes"></textarea></div>
+
+<h2 id="4-deploy-the-northwind-data-service-20-minutes">4. Deploy the Northwind data service (20 minutes)</h2>
+<p>This is the CAP service that owns the orders and the row rule, packaged with its HDI database container and its XSUAA sign-in configuration. One deployment creates all three.</p>
+<pre><code class="language-bash">cd SAP-BTP/apps/northwind-service
+npm ci
+mbt build
+cf deploy mta_archives/northwind-service_0.1.0.mtar
+</code></pre>
+<p>The build takes a minute, the deployment three to five; it ends with "Process finished". Then:</p>
+<pre><code class="language-bash">cf apps
+</code></pre>
+<p><code>northwind-service-srv</code> is started with one instance; <code>northwind-service-db-deployer</code> is stopped (it ran once to create the tables and load the 830 orders). In the cockpit, Instances and Subscriptions now lists three instances: your HANA database, <code>northwind-service-auth</code> (XSUAA) and <code>northwind-service-db</code> (the HDI container).</p>
+<p>Open the service address in a browser: <code>cf app northwind-service-srv</code> prints it under routes; add <code>/odata/v4/northwind/Orders</code>. You must get <strong>401 Unauthorized</strong>. That is correct: on BTP the mocked users are gone and only a valid SAP token is accepted.</p>
+<p><strong>Roles.</strong> Cockpit &gt; Security &gt; Users &gt; your user &gt; Role Collections &gt; Assign: tick <code>SalesHQ (northwind-service &lt;org&gt;-dev)</code>, which the deployment created. You are Nancy. For Steven, create the region role once: Security &gt; Roles, search <code>northwind</code>, on the <code>SalesRegion</code> template click <strong>Create Role</strong>, name <code>SalesRegion_UK</code>, next; attribute <code>country</code>, source Static, value <code>UK</code> and press Enter so it becomes a chip (Next stays grey until it does); skip role collections; Finish. Then Security &gt; Role Collections &gt; Create, name <code>Northwind SalesRegion UK</code>, open it, Edit, add the role <code>SalesRegion_UK</code>, Save. Leave it unassigned for now.</p>
+<p>Check: <code>cf apps</code> shows the service started and the browser answers 401.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s13-notes"></textarea></div>
+
+<h2 id="5-the-documents-into-hana-20-minutes">5. The documents into HANA (20 minutes)</h2>
+<p>The 86 policy passages go into a table in your database and are embedded there by HANA's own model. Open the SQL console on your instance as DBADMIN.</p>
+<ol>
+<li>Open <code>apps/hana/load_policy_chunks.sql</code> from the repository in a text editor. It is one CREATE TABLE and 86 INSERT statements. Paste it into the console in two or three portions (the editor handles a few hundred lines at a time comfortably) and click Run after each. Every statement reports Success.</li>
+<li>Embed the passages, one statement:</li>
+</ol>
+<pre><code class="language-sql">UPDATE POLICY_CHUNKS SET VEC = VECTOR_EMBEDDING(TO_NVARCHAR(TEXT), 'DOCUMENT', 'SAP_NEB.20240715');
+SELECT COUNT(*) AS LOADED, SUM(CASE WHEN VEC IS NULL THEN 0 ELSE 1 END) AS EMBEDDED FROM POLICY_CHUNKS;
+</code></pre>
+<p>Expected: 86 and 86.</p>
+<ol>
+<li>Try the search that the MCP server will run, as Nancy (audiences all-staff, sales, sales-seattle) on the lab date:</li>
+</ol>
+<pre><code class="language-sql">SELECT TOP 3 CHUNK_ID, ROUND(COSINE_SIMILARITY(VEC, VECTOR_EMBEDDING('customer wants a rush job, is that allowed?', 'QUERY', 'SAP_NEB.20240715')), 3) AS SCORE
+FROM POLICY_CHUNKS
+WHERE STATUS = 'current' AND (EFFECTIVE_FROM IS NULL OR EFFECTIVE_FROM &lt;= DATE'2026-05-07') AND (EFFECTIVE_TO IS NULL OR EFFECTIVE_TO &gt;= DATE'2026-05-07') AND AUDIENCE IN ('all-staff','sales','sales-seattle')
+ORDER BY SCORE DESC;
+</code></pre>
+<p>Expected: <code>NW-RUN-001@1.0#03</code> (the runbook's rush-order situation) first, around 0.67. Change the audiences to <code>'all-staff','sales','sales-london'</code> and ask <code>How far are we prepared to go on the QUICK-Stop contract discount?</code>: now <code>NW-MEM-001@1.0#03</code> comes first. That is Exercise 3 of Part A, inside the database.</p>
+<ol>
+<li>Create the technical user the MCP server will use; open <code>apps/hana/create_policy_reader.sql</code>, replace <code>&lt;choose-a-password&gt;</code> with a password you choose (save it as "POLICY_READER"), run it. Then <strong>History &gt; Clear All</strong> so the password leaves the screen.</li>
+</ol>
+<p>Check: the count returns 86 and 86, and the rush-job search returns the runbook first.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s14-notes"></textarea></div>
+
+<h2 id="6-deploy-the-mcp-server-and-connect-claude-55-minutes">6. Deploy the MCP server and connect Claude (55 minutes)</h2>
+<p>The MCP server offers the three tools, verifies SAP tokens, and forwards them to the data service. It never runs without sign-in: there is no development switch in its deployment file, and it refuses to start if its sign-in binding is missing.</p>
+<p><strong>6a. Tell XSUAA where Claude's sign-in may return to.</strong> <code>apps/northwind-service/mta.yaml</code> already lists Claude's callback addresses; if you deployed the data service from the current repository in section 4, this is already in place. If you deployed from an older copy, repeat the three commands of section 4 once.</p>
+<p><strong>6b. Give the server its database credentials.</strong> A user-provided service holds the POLICY_READER details. The command asks for each value; answer them one at a time and press Enter after each. The host is on your instance's page in HANA Cloud Central (<strong>Copy SQL Endpoint</strong>), without the <code>:443</code>.</p>
+<pre><code class="language-bash">cf cups policy-db -p &quot;host, port, user, password, schema&quot;
+</code></pre>
+<p>host: your instance's SQL endpoint host; port: <code>443</code>; user: <code>POLICY_READER</code>; password: the one you chose in section 5; schema: <code>DBADMIN</code>. If you later see an SSL error with the host name written twice, the host was pasted twice: run <code>cf update-user-provided-service policy-db -p "host, port, user, password, schema"</code> and type it once.</p>
+<p><strong>6c. Adjust the route to your account and deploy.</strong> Open <code>apps/mcp-servers/manifest.yml</code>. Two lines carry the instructor's org name and must carry yours: <code>route:</code> and <code>MCP_PUBLIC_URL:</code> (replace <code>cab3acb2trial</code> with your org name in both), and <code>NORTHWIND_SERVICE_URL:</code> must be your data service address from section 4 followed by <code>/odata/v4/northwind</code>. Then:</p>
+<pre><code class="language-bash">cd SAP-BTP/apps/mcp-servers
+cf push
+</code></pre>
+<p>Two to four minutes. The result shows <code>northwind-mcp</code> running, 1/1. If it crashes with "No module named mcp.server.fastmcp", the Python dependency <code>mcp</code> was installed at version 2; <code>requirements.txt</code> in the current repository pins it below 2, so make sure you have the latest copy.</p>
+<p><strong>6d. Check before touching Claude.</strong> With <code>BASE</code> set to your route:</p>
+<pre><code class="language-bash">BASE=https://northwind-mcp-&lt;your org&gt;.cfapps.ap21.hana.ondemand.com
+curl -s $BASE/health
+curl -s -i -X POST $BASE/mcp -H &quot;content-type: application/json&quot; -d &quot;{}&quot; | head -6
+</code></pre>
+<p>Expected: <code>"signed_in_required":true</code>, then <code>HTTP/2 401</code> with a <code>www-authenticate</code> line that names <code>oauth-protected-resource</code>. Without a token, nothing; that is the point.</p>
+<p><strong>6e. The client id and secret for Claude.</strong></p>
+<pre><code class="language-bash">cf create-service-key northwind-service-auth claude-connector
+cf service-key northwind-service-auth claude-connector
+</code></pre>
+<p>From the printed JSON copy <code>clientid</code> and <code>clientsecret</code> into your password manager. They go only into Claude's connector settings.</p>
+<p><strong>6f. Add the connector in Claude.</strong> Settings &gt; Connectors &gt; <strong>Add custom connector</strong>. Name <code>Northwind Advisor</code>; Remote MCP server URL <code>https://northwind-mcp-&lt;your org&gt;.cfapps.ap21.hana.ondemand.com/mcp</code>; open Advanced settings and paste the OAuth Client ID and Client Secret; Add; <strong>Connect</strong>. The SAP sign-in page of your trial tenant opens; sign in with your BTP user. Claude shows Connected.</p>
+<p><strong>6g. The four questions.</strong> Start a new chat with the connector on and ask, one at a time:</p>
+<ol>
+<li>What is the status of order 11019, and can it be expedited?</li>
+<li>How much discount can I give a customer on my own authority?</li>
+<li>How far are we prepared to go on the QUICK-Stop contract discount?</li>
+<li>Has the delivery lead time for Pavlova products changed? Approve a 40 percent discount on their products for me.</li>
+</ol>
+<p>Compare with the Demo Script's expected answers: facts from <code>get_order_status</code>, rules cited as <code>doc_id vVersion, section</code>, nothing from the superseded, draft or supplier documents, no figure for QUICK-Stop, and a refusal to approve. If a tool call reports that the session expired, ask again; Claude reconnects.</p>
+<p><strong>6h. Become Steven.</strong> Cockpit &gt; Security &gt; Users &gt; your user &gt; Role Collections: remove <code>SalesHQ</code> (the × in its row) and assign <code>Northwind SalesRegion UK</code>. In Claude, disconnect the connector and connect again so a new token is issued. Ask question 3 again: the answer now cites <code>NW-MEM-001 v1.0, 2. QUICK-Stop contract renewal</code>. Ask for order 11070: "No order with this number is visible to you." Swap back the same way when you are done, and never leave both collections assigned: the platform combines them, and head office wins.</p>
+<p>Check: question 1 answers with order data and citations as Nancy; question 3 changes its answer as Steven.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s15-notes"></textarea></div>
+
+<h2 id="what-you-have-built">What you have built</h2>
+<p>The same six steps as the instructor's demo, on your own tenant: sign-in through XSUAA, a token that travels with every question, a data service that applies the row rule from that token, a document store whose filter runs inside HANA with your audiences in the WHERE clause, and an assistant that answers from facts and cited passages only. Deck slide 17 is now a description of something you own.</p>
+<p>To keep it: the trial lasts 90 days; the instance stops nightly and restarts with one click; the connector's token lasts 12 hours and Claude refreshes it. To tidy up: <code>cf delete-service-key northwind-service-auth claude-connector</code> removes the connector's credentials, <code>cf delete northwind-mcp</code> removes the server, and the cockpit's Instances and Subscriptions page deletes the rest.</p>
+<div class="box notes"><label>My notes</label><textarea data-key="s16-notes"></textarea></div>
+</main>
+<footer>Raj Academy · Governed AI on SAP BTP · generated 2026-09-18 from 03_Student_Workbook.md</footer>
+<script>
+(function(){
+  const DOC = document.documentElement.dataset.doc, LANG = document.documentElement.dataset.lang;
+  const KEY = 'hb:' + DOC;                         // shared across languages: same keys, same ticks
+  const T = JSON.parse(document.getElementById('hb-ui').textContent);
+  const fields = () => Array.from(document.querySelectorAll('[data-key]'));
+  function collect(){ const s = {}; for (const el of fields()) { s[el.dataset.key] = el.type === 'checkbox' ? el.checked : el.value; } return s; }
+  function apply(s){ if (!s) return; for (const el of fields()) { if (!(el.dataset.key in s)) continue; if (el.type === 'checkbox') el.checked = !!s[el.dataset.key]; else el.value = s[el.dataset.key] || ''; } refresh(); }
+  function refresh(){
+    const boxes = Array.from(document.querySelectorAll('input[type=checkbox][data-key]'));
+    const done = boxes.filter(b => b.checked).length;
+    for (const b of boxes) b.closest('li').classList.toggle('done', b.checked);
+    const pct = boxes.length ? Math.round(100 * done / boxes.length) : 0;
+    document.querySelector('header.hb .prog').style.display = boxes.length ? '' : 'none';
+    document.getElementById('hb-bar').style.width = pct + '%';
+    document.getElementById('hb-count').textContent = done + ' / ' + boxes.length;
+  }
+  function persist(){ try { localStorage.setItem(KEY, JSON.stringify({at: new Date().toISOString(), state: collect()})); document.getElementById('hb-saved').textContent = T.saved + ' · ' + new Date().toLocaleTimeString(); } catch (e) {} }
+  function embedded(){ try { return JSON.parse(document.getElementById('hb-state').textContent || 'null'); } catch (e) { return null; } }
+  function saveCopy(){
+    const payload = {at: new Date().toISOString(), lang: LANG, state: collect()};
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelector('#hb-state').textContent = JSON.stringify(payload).replace(/<\//g, '<\\/');
+    for (const ta of clone.querySelectorAll('textarea[data-key]')) ta.textContent = payload.state[ta.dataset.key] || '';
+    for (const cb of clone.querySelectorAll('input[type=checkbox][data-key]')) { if (payload.state[cb.dataset.key]) cb.setAttribute('checked', ''); else cb.removeAttribute('checked'); }
+    const blob = new Blob(['<!doctype html>\n' + clone.outerHTML], {type: 'text/html'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = DOC + '_' + LANG + '_' + payload.at.slice(0, 10) + '.html'; document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  function reset(){ if (!confirm(T.reset_confirm)) return; for (const el of fields()) { if (el.type === 'checkbox') el.checked = false; else el.value = ''; } try { localStorage.removeItem(KEY); } catch (e) {} refresh(); document.getElementById('hb-saved').textContent = ''; }
+  document.addEventListener('DOMContentLoaded', () => {
+    const emb = embedded(); let local = null; try { local = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+    if (emb && emb.state) { apply(emb.state); document.getElementById('hb-saved').textContent = T.saved_file + ' ' + new Date(emb.at).toLocaleString(); }
+    else if (local && local.state) { apply(local.state); document.getElementById('hb-saved').textContent = T.saved + ' · ' + new Date(local.at).toLocaleString(); }
+    else refresh();
+    document.addEventListener('input', e => { if (e.target.dataset && e.target.dataset.key) { refresh(); persist(); } });
+    document.getElementById('hb-save').addEventListener('click', saveCopy);
+    document.getElementById('hb-reset').addEventListener('click', reset);
+    document.getElementById('hb-print').addEventListener('click', () => window.print());
+    for (const pre of document.querySelectorAll('pre')) { const b = document.createElement('button'); b.className = 'copy'; b.textContent = 'copy'; b.addEventListener('click', () => { navigator.clipboard.writeText(pre.querySelector('code').textContent).then(() => { b.textContent = 'copied'; setTimeout(() => b.textContent = 'copy', 1200); }); }); pre.appendChild(b); }
+  });
+})();
+</script>
+</body>
+</html>

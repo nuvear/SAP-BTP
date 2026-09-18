@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ja" data-doc="Northwind_README" data-lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>コース教材: SAP BTP上のガバナンスされたAI</title>
+<style>
+:root{--ink:#1c2430;--muted:#5b6673;--line:#d9dee5;--bg:#fbfbf9;--card:#ffffff;--accent:#0a6ed1;--accent-ink:#ffffff;--ok:#2e7d32;--soft:#eef3f8;--code:#f4f5f7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans","Noto Sans JP","Noto Sans SC","Hiragino Sans","PingFang SC",Roboto,Helvetica,Arial,sans-serif}
+header.hb{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+header.hb .t{font-weight:700;margin-right:auto}
+header.hb .prog{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+header.hb .bar{width:140px;height:8px;background:var(--soft);border-radius:4px;overflow:hidden}
+header.hb .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .2s}
+header.hb button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:14px}
+header.hb button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+header.hb .langs a{margin-left:6px;font-size:14px;text-decoration:none;color:var(--accent)}
+header.hb .langs a.cur{font-weight:700;color:var(--ink)}
+main{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+.hint{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:14px;color:var(--muted);margin:0 0 18px}
+h1{font-size:30px;line-height:1.2;margin:.2em 0 .4em}h2{font-size:22px;margin:1.8em 0 .5em;padding-top:.4em;border-top:1px solid var(--line)}h3{font-size:18px}
+h1.part{margin-top:2.2em;font-size:24px;color:var(--accent)}
+p,li{max-width:72ch}
+a{color:var(--accent)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.92em;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#1f2937;color:#e5e7eb;padding:12px 14px;border-radius:8px;overflow-x:auto;position:relative;font-size:14px}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+pre .copy{position:absolute;top:6px;right:6px;font-size:12px;border:1px solid #4b5563;background:#374151;color:#e5e7eb;border-radius:5px;padding:2px 8px;cursor:pointer}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0 16px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--soft)}
+ul.tasks{list-style:none;padding-left:0}ul.tasks li{margin:6px 0;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);display:flex;gap:10px;align-items:flex-start}
+ul.tasks input{margin-top:5px;width:18px;height:18px;flex:none}
+ul.tasks li.done{background:#f1f8f1;border-color:#c8e6c9}ul.tasks li.done label{color:var(--muted);text-decoration:line-through}
+.box{margin:8px 0 16px}.box label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.box textarea{width:100%;min-height:72px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:inherit;font-size:15px;background:var(--card);resize:vertical}
+.box textarea:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+.notes textarea{min-height:56px;background:#fffdf3}
+details.key{border:1px dashed var(--line);border-radius:8px;padding:8px 14px;margin:12px 0}details.key summary{cursor:pointer;font-weight:600}
+.saved{font-size:13px;color:var(--muted)}
+footer{max-width:860px;margin:0 auto;padding:0 16px 40px;font-size:13px;color:var(--muted)}
+@media print{header.hb,.hint,pre .copy{display:none}body{background:#fff}main{max-width:none;padding:0}.box textarea{border:1px solid #999;min-height:40px}details.key{display:block}details.key[open] summary{display:none}}
+</style>
+<script type="application/json" id="hb-ui">{"progress": "進捗", "save": "自分のコピーを保存", "reset": "すべて消去", "print": "印刷", "notes": "メモ", "answer": "自分の答え", "key": "解答例（演習を試してから開いてください）", "saved": "このブラウザーに保存済み", "saved_file": "このファイルには次の時点の保存内容が含まれています:", "hint": "チェックを入れ、記入しながら進めてください。内容はこのブラウザーに残ります。「自分のコピーを保存」で内容を含むファイルをダウンロードできます。", "reset_confirm": "このページのチェックと回答をすべて消去しますか？", "lang": "言語"}</script>
+<script type="application/json" id="hb-state"></script>
+</head>
+<body>
+<header class="hb">
+  <span class="t">コース教材: SAP BTP上のガバナンスされたAI</span>
+  <span class="prog">進捗 <span class="bar"><i id="hb-bar"></i></span> <span id="hb-count">0 / 0</span></span>
+  <span class="langs">言語: <a href="../English/index.html" class="">English</a> <a href="../Japanese/index.html" class="cur">日本語</a> <a href="../Chinese/index.html" class="">简体中文</a></span>
+  <button id="hb-print">印刷</button>
+  <button id="hb-reset">すべて消去</button>
+  <button id="hb-save" class="primary">自分のコピーを保存</button>
+  <span id="hb-saved" class="saved"></span>
+</header>
+<main>
+<p class="hint">チェックを入れ、記入しながら進めてください。内容はこのブラウザーに残ります。「自分のコピーを保存」で内容を含むファイルをダウンロードできます。</p>
+<h1 id="sap-btpai">コース教材: SAP BTP上のガバナンスされたAI</h1>
+<p>Raj Academy、SAPエンジニア向けハンズオンコース。このフォルダー内のすべての教材は英語、日本語、簡体字中国語で用意されています。コード、コマンド、ファイル名、引用は3言語で共通です。</p>
+<h2 id="_1">受講者向け</h2>
+<table>
+<thead>
+<tr>
+<th>ページ</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>03_Student_Workbook.html</code></td>
+<td>ハンズオンのワークブック: パートAはラップトップ演習（SAPアカウント不要）、パートBは自分のSAP BTPトライアルテナント。タスクにチェックを入れ、回答とメモを入力し、「Save my copy」をクリックすると記入済みのファイルをダウンロードできます。</td>
+</tr>
+<tr>
+<td><code>04_Lab_Guide.html</code></td>
+<td>ラボごとに1セクション: 各ペルソナが何を尋ね、何が返り、それが正しいかどうかとその理由。セッション後に読んでください。</td>
+</tr>
+</tbody>
+</table>
+<p>自分の言語のページを開いてください: <code>English/</code>、<code>Japanese/</code>、<code>Chinese/</code>。すべてのページの上部に言語切り替えがあります。チェックと回答はブラウザごとに保存され、言語を切り替えても引き継がれます。</p>
+<p>コードは <a href="https://github.com/nuvear/SAP-BTP">https://github.com/nuvear/SAP-BTP</a> にあります: <code>apps/</code>（データサービス、ポリシーローダー、MCPサーバー、デプロイガイド、ラボコンダクター）と <code>data/northwind/</code>（11件のポリシー文書と3件の堅牢性文書）。</p>
+<div class="box notes"><label>メモ</label><textarea data-key="s1-notes"></textarea></div>
+
+<h2 id="_2">講師向け</h2>
+<p>各言語フォルダー内の <code>instructor/</code> には、セッションランブック（デッキに対応付けた1日分のアジェンダ）、デモスクリプト（ライブデモを質問ごとに記述）、解答例が入っています。これらのフォルダーは <code>.gitignore</code> によって公開リポジトリから除外されています。デッキは <code>../04. Governed_AI_on_SAP_BTP.pptx</code> です。セッション中に使うステージページ（一度に1ステップずつ、ラボの図と記録済みの証跡付き）は、非公開のClaudeアーティファクトです。</p>
+<div class="box notes"><label>メモ</label><textarea data-key="s2-notes"></textarea></div>
+
+<h2 id="_3">ファイルの作り方</h2>
+<p><code>markdown/en</code>、<code>markdown/ja</code>、<code>markdown/zh</code> にソースがあります。英語のソースはライブのClaude Docs（ランブック、デモスクリプト、ワークブック、ラボガイド）のスナップショットで、翻訳はそのスナップショットから作成されています。<code>tools/build_package.py</code> が <code>tools/build_handbook.py</code> を使ってソースからすべてのHTMLページをビルドします。ライブ文書を編集した後は、再度エクスポートしてリビルドしてください。</p>
+<div class="box notes"><label>メモ</label><textarea data-key="s3-notes"></textarea></div>
+</main>
+<footer>Raj Academy · Governed AI on SAP BTP · generated 2026-09-18 from 00_README.md</footer>
+<script>
+(function(){
+  const DOC = document.documentElement.dataset.doc, LANG = document.documentElement.dataset.lang;
+  const KEY = 'hb:' + DOC;                         // shared across languages: same keys, same ticks
+  const T = JSON.parse(document.getElementById('hb-ui').textContent);
+  const fields = () => Array.from(document.querySelectorAll('[data-key]'));
+  function collect(){ const s = {}; for (const el of fields()) { s[el.dataset.key] = el.type === 'checkbox' ? el.checked : el.value; } return s; }
+  function apply(s){ if (!s) return; for (const el of fields()) { if (!(el.dataset.key in s)) continue; if (el.type === 'checkbox') el.checked = !!s[el.dataset.key]; else el.value = s[el.dataset.key] || ''; } refresh(); }
+  function refresh(){
+    const boxes = Array.from(document.querySelectorAll('input[type=checkbox][data-key]'));
+    const done = boxes.filter(b => b.checked).length;
+    for (const b of boxes) b.closest('li').classList.toggle('done', b.checked);
+    const pct = boxes.length ? Math.round(100 * done / boxes.length) : 0;
+    document.querySelector('header.hb .prog').style.display = boxes.length ? '' : 'none';
+    document.getElementById('hb-bar').style.width = pct + '%';
+    document.getElementById('hb-count').textContent = done + ' / ' + boxes.length;
+  }
+  function persist(){ try { localStorage.setItem(KEY, JSON.stringify({at: new Date().toISOString(), state: collect()})); document.getElementById('hb-saved').textContent = T.saved + ' · ' + new Date().toLocaleTimeString(); } catch (e) {} }
+  function embedded(){ try { return JSON.parse(document.getElementById('hb-state').textContent || 'null'); } catch (e) { return null; } }
+  function saveCopy(){
+    const payload = {at: new Date().toISOString(), lang: LANG, state: collect()};
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelector('#hb-state').textContent = JSON.stringify(payload).replace(/<\//g, '<\\/');
+    for (const ta of clone.querySelectorAll('textarea[data-key]')) ta.textContent = payload.state[ta.dataset.key] || '';
+    for (const cb of clone.querySelectorAll('input[type=checkbox][data-key]')) { if (payload.state[cb.dataset.key]) cb.setAttribute('checked', ''); else cb.removeAttribute('checked'); }
+    const blob = new Blob(['<!doctype html>\n' + clone.outerHTML], {type: 'text/html'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = DOC + '_' + LANG + '_' + payload.at.slice(0, 10) + '.html'; document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  function reset(){ if (!confirm(T.reset_confirm)) return; for (const el of fields()) { if (el.type === 'checkbox') el.checked = false; else el.value = ''; } try { localStorage.removeItem(KEY); } catch (e) {} refresh(); document.getElementById('hb-saved').textContent = ''; }
+  document.addEventListener('DOMContentLoaded', () => {
+    const emb = embedded(); let local = null; try { local = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+    if (emb && emb.state) { apply(emb.state); document.getElementById('hb-saved').textContent = T.saved_file + ' ' + new Date(emb.at).toLocaleString(); }
+    else if (local && local.state) { apply(local.state); document.getElementById('hb-saved').textContent = T.saved + ' · ' + new Date(local.at).toLocaleString(); }
+    else refresh();
+    document.addEventListener('input', e => { if (e.target.dataset && e.target.dataset.key) { refresh(); persist(); } });
+    document.getElementById('hb-save').addEventListener('click', saveCopy);
+    document.getElementById('hb-reset').addEventListener('click', reset);
+    document.getElementById('hb-print').addEventListener('click', () => window.print());
+    for (const pre of document.querySelectorAll('pre')) { const b = document.createElement('button'); b.className = 'copy'; b.textContent = 'copy'; b.addEventListener('click', () => { navigator.clipboard.writeText(pre.querySelector('code').textContent).then(() => { b.textContent = 'copied'; setTimeout(() => b.textContent = 'copy', 1200); }); }); pre.appendChild(b); }
+  });
+})();
+</script>
+</body>
+</html>

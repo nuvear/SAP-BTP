@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="zh" data-doc="Northwind_Workbook" data-lang="zh">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Northwind Advisor 学员练习手册</title>
+<style>
+:root{--ink:#1c2430;--muted:#5b6673;--line:#d9dee5;--bg:#fbfbf9;--card:#ffffff;--accent:#0a6ed1;--accent-ink:#ffffff;--ok:#2e7d32;--soft:#eef3f8;--code:#f4f5f7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans","Noto Sans JP","Noto Sans SC","Hiragino Sans","PingFang SC",Roboto,Helvetica,Arial,sans-serif}
+header.hb{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+header.hb .t{font-weight:700;margin-right:auto}
+header.hb .prog{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+header.hb .bar{width:140px;height:8px;background:var(--soft);border-radius:4px;overflow:hidden}
+header.hb .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .2s}
+header.hb button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:14px}
+header.hb button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+header.hb .langs a{margin-left:6px;font-size:14px;text-decoration:none;color:var(--accent)}
+header.hb .langs a.cur{font-weight:700;color:var(--ink)}
+main{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+.hint{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:14px;color:var(--muted);margin:0 0 18px}
+h1{font-size:30px;line-height:1.2;margin:.2em 0 .4em}h2{font-size:22px;margin:1.8em 0 .5em;padding-top:.4em;border-top:1px solid var(--line)}h3{font-size:18px}
+h1.part{margin-top:2.2em;font-size:24px;color:var(--accent)}
+p,li{max-width:72ch}
+a{color:var(--accent)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.92em;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#1f2937;color:#e5e7eb;padding:12px 14px;border-radius:8px;overflow-x:auto;position:relative;font-size:14px}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+pre .copy{position:absolute;top:6px;right:6px;font-size:12px;border:1px solid #4b5563;background:#374151;color:#e5e7eb;border-radius:5px;padding:2px 8px;cursor:pointer}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0 16px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--soft)}
+ul.tasks{list-style:none;padding-left:0}ul.tasks li{margin:6px 0;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);display:flex;gap:10px;align-items:flex-start}
+ul.tasks input{margin-top:5px;width:18px;height:18px;flex:none}
+ul.tasks li.done{background:#f1f8f1;border-color:#c8e6c9}ul.tasks li.done label{color:var(--muted);text-decoration:line-through}
+.box{margin:8px 0 16px}.box label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.box textarea{width:100%;min-height:72px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:inherit;font-size:15px;background:var(--card);resize:vertical}
+.box textarea:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+.notes textarea{min-height:56px;background:#fffdf3}
+details.key{border:1px dashed var(--line);border-radius:8px;padding:8px 14px;margin:12px 0}details.key summary{cursor:pointer;font-weight:600}
+.saved{font-size:13px;color:var(--muted)}
+footer{max-width:860px;margin:0 auto;padding:0 16px 40px;font-size:13px;color:var(--muted)}
+@media print{header.hb,.hint,pre .copy{display:none}body{background:#fff}main{max-width:none;padding:0}.box textarea{border:1px solid #999;min-height:40px}details.key{display:block}details.key[open] summary{display:none}}
+</style>
+<script type="application/json" id="hb-ui">{"progress": "进度", "save": "保存我的副本", "reset": "全部清除", "print": "打印", "notes": "我的笔记", "answer": "我的答案", "key": "参考答案（请先尝试练习再打开）", "saved": "已保存在此浏览器中", "saved_file": "此文件包含以下时间保存的内容:", "hint": "边做边勾选和填写。内容会保留在此浏览器中；点击“保存我的副本”可下载包含内容的文件。", "reset_confirm": "清除此页面上的所有勾选和答案？", "lang": "语言"}</script>
+<script type="application/json" id="hb-state"></script>
+</head>
+<body>
+<header class="hb">
+  <span class="t">Northwind Advisor 学员练习手册</span>
+  <span class="prog">进度 <span class="bar"><i id="hb-bar"></i></span> <span id="hb-count">0 / 0</span></span>
+  <span class="langs">语言: <a href="../English/03_Student_Workbook.html" class="">English</a> <a href="../Japanese/03_Student_Workbook.html" class="">日本語</a> <a href="../Chinese/03_Student_Workbook.html" class="cur">简体中文</a></span>
+  <button id="hb-print">打印</button>
+  <button id="hb-reset">全部清除</button>
+  <button id="hb-save" class="primary">保存我的副本</button>
+  <span id="hb-saved" class="saved"></span>
+</header>
+<main>
+<p class="hint">边做边勾选和填写。内容会保留在此浏览器中；点击“保存我的副本”可下载包含内容的文件。</p>
+<h1 id="northwind-advisor">Northwind Advisor 学员练习手册</h1>
+<p>Raj Academy · 2026年9月18日</p>
+<p>本手册是"SAP BTP 上的受治理 AI"课程的动手实践配套材料，分为两部分。第A部分在你自己的笔记本电脑上运行公开代码仓库中的代码：不需要 SAP BTP 账户、API 密钥或密码；预计约九十分钟。第B部分在你自己的免费 SAP BTP 试用账户上构建同一个顾问助手，使用真实的 SAP 登录，与讲师的演示运行方式相同；预计约四小时。请携带：一台拥有管理员权限的笔记本电脑，Node.js 20+、Python 3.11+、git；第B部分还需要一部手机用于接收 SAP 验证码，以及（可选）一个 Claude 账户。</p>
+<h1 class="part" id="a">第A部分: 笔记本电脑实验</h1>
+<h2 id="_1">你将构建什么</h2>
+<p>你将在自己的机器上运行演示中看到的同样三个组件：带有行规则的 Northwind 数据服务、带有文档过滤器的策略库，以及提供三个只读工具的 MCP 服务器。你将使用两个内置测试用户来代替 SAP 登录，并使用 MCP Inspector 来代替 Claude；MCP Inspector 是一个小型网页，让你可以手动调用工具，并准确看到返回的内容。这正是本手册的意义所在：在模型把答案转化为文字之前，先看到原始的返回结果。</p>
+<table>
+<thead>
+<tr>
+<th>测试用户</th>
+<th>办公室</th>
+<th>角色</th>
+<th>可读取的订单</th>
+<th>可读取的文档</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nancy</code></td>
+<td>西雅图</td>
+<td>SalesHQ</td>
+<td>全部 830 条</td>
+<td>all-staff, sales, sales-seattle</td>
+</tr>
+<tr>
+<td><code>steven</code></td>
+<td>伦敦</td>
+<td>SalesRegion，国家 UK</td>
+<td>英国销售人员的 224 条订单</td>
+<td>all-staff, sales, sales-london</td>
+</tr>
+</tbody>
+</table>
+<p>实验日期固定为 2026年5月7日，因为样本数据截止于 2026年5月6日。凡是规则中提到"今天"，指的都是这个日期。</p>
+<p>你需要：Node.js 20 或更高版本、Python 3.11 或更高版本、git，以及一个浏览器。用 <code>node --version</code>、<code>python3 --version</code>、<code>git --version</code> 检查。Windows 用户：请使用 PowerShell 或 WSL；下面的命令是为 Unix 风格的 shell 编写的，PowerShell 有差异的地方会另行注明。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s1-notes"></textarea></div>
+
+<h2 id="20">环境准备：三个终端，约 20 分钟</h2>
+<p>获取代码，只需一次：</p>
+<pre><code class="language-bash">git clone https://github.com/nuvear/SAP-BTP.git
+cd SAP-BTP/apps
+</code></pre>
+<p><strong>终端 1，数据服务。</strong> 这是拥有订单数据和行规则的 SAP CAP 服务。在本地它使用内存数据库和两个模拟用户。</p>
+<pre><code class="language-bash">cd northwind-service
+npm ci
+npm test
+npm start
+</code></pre>
+<p><code>npm test</code> 的输出必须以 <code># pass 9</code> 和 <code># fail 0</code> 结尾。<code>npm start</code> 会打印一行包含 <code>http://localhost:4004</code> 的内容，随后是 <code>server ... launched</code>；出现 SQLite 处于实验阶段的警告属于正常现象。让它保持运行。在浏览器中打开 <a href="http://localhost:4004/odata/v4/northwind/Orders?$top=3">http://localhost:4004/odata/v4/northwind/Orders?$top=3</a>：它会要求输入用户；输入用户名 <code>nancy</code> 和密码 <code>nancy</code>，你会看到三条订单的 JSON 数据。这就是助手所读取的内容。</p>
+<p><strong>终端 2，MCP 服务器。</strong> 它提供三个工具，并且在本地对代码仓库中已有的 86 个策略段落（<code>policy-loader/chunks.jsonl</code>）进行关键词搜索。</p>
+<pre><code class="language-bash">cd mcp-servers
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m pytest -q
+DEV_MODE=1 DEV_USER=nancy LAB_TODAY=2026-05-07 python server.py advisor
+</code></pre>
+<p><code>pytest</code> 必须显示 45 passed（出现少量弃用警告属于正常；它会在另一个端口上启动自己的一份数据服务副本，因此终端 1 不会造成干扰）。最后一条命令会打印 <code>Uvicorn running on http://0.0.0.0:8000</code>。它不会回显你选择的用户，所以请在启动前检查变量。在 PowerShell 上，用 <code>.venv\Scripts\Activate.ps1</code> 激活虚拟环境，并在运行 <code>python server.py advisor</code> 之前用 <code>$env:DEV_MODE="1"; $env:DEV_USER="nancy"; $env:LAB_TODAY="2026-05-07"</code> 设置变量。</p>
+<p><code>DEV_MODE=1</code> 的含义：在你的笔记本电脑上没有 SAP 登录，所以服务器从 <code>DEV_USER</code> 获取用户。在 BTP 上这个开关并不存在；服务器会拒绝任何没有有效 SAP 令牌的调用。切勿带着这个开关部署。</p>
+<p><strong>终端 3，MCP Inspector。</strong> 这是你观察工具的窗口。</p>
+<pre><code class="language-bash">npx @modelcontextprotocol/inspector
+</code></pre>
+<p>它会打开一个浏览器页面。选择传输方式 <strong>Streamable HTTP</strong>（可流式 HTTP），URL 填 <code>http://localhost:8000/mcp</code>，点击 <strong>Connect</strong>（连接），然后点击 <strong>List Tools</strong>（列出工具）。你应该能看到 <code>get_order_status</code>、<code>get_product_availability</code> 和 <code>search_policies</code>。如果 Connect 失败，请检查终端 2 是否仍在运行，以及 URL 是否以 <code>/mcp</code> 结尾。</p>
+<p>之后要切换为 Steven 时，在终端 2 中用 Ctrl+C 停止服务器，再用 <code>DEV_USER=steven</code> 重新启动，然后在 Inspector 中再次点击 Connect。（不重启的替代方法：在 Inspector 中添加一个自定义请求头 <code>X-Dev-User: steven</code>；请求头的优先级高于环境变量。）</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s2-notes"></textarea></div>
+
+<h2 id="115">练习 1：实时事实与行规则（15 分钟）</h2>
+<p>在 Inspector 中选择 <code>get_order_status</code>，输入 <code>order_id</code> = <code>11019</code>，点击 Run Tool（运行工具）。</p>
+<ul class="tasks">
+<li><input type="checkbox" id="t1" data-key="t1"><label for="t1">记录：客户、销售人员及其办公室所在国家、要求交付日期、<code>days_until_required</code>、承运商，以及两个产品行及其库存。注意 <code>data_read_at</code>：每一条事实都带有它被读取的时间。</label></li>
+<li><input type="checkbox" id="t2" data-key="t2"><label for="t2">再用 <code>11070</code> 运行一次。销售人员是 Andrew Fuller，美国办公室。记下 <code>days_until_required</code>。</label></li>
+<li><input type="checkbox" id="t3" data-key="t3"><label for="t3">现在切换为 Steven（用 <code>DEV_USER=steven</code> 重启终端 2，重新连接）。分别对 <code>11019</code> 和 <code>11070</code> 运行 <code>get_order_status</code>。</label></li>
+</ul>
+<p>你应该看到的结果：作为 Steven，11019 能够返回（其销售人员在英国办公室），而 11070 返回 <code>found: false</code>，"No order with this number is visible to you."（没有此编号的订单对你可见。）这不是 MCP 服务器做出的决定。它以不同的用户身份向数据服务发送了同样的请求，是数据服务的行规则给出了回答。查看终端 1：两个请求都被记录了下来，第二个请求后面跟着 <code>404 - Error: Not Found</code>。</p>
+<p>为什么措辞很重要。在任何工具存在之前，一个被问及订单 11019 的模型仍然会根据训练中学到的模式自信地作答；而订单 11019 只存在于本实验的数据库中，所以那样的回答会是编造的（幻觉）。你在这里看到的每一个值都是在调用的那一刻从某一行数据中读取的，<code>data_read_at</code> 说明了读取的时间。基于事实的检索取代了编造。</p>
+<ul class="tasks">
+<li><input type="checkbox" id="t4" data-key="t4"><label for="t4">用 <code>Rössle Sauerkraut</code> 和 <code>Chai</code> 试试 <code>get_product_availability</code>。一个是已停产但仍有库存的产品；另一个是正常产品。哪些字段告诉了你这一点？</label></li>
+</ul>
+<p>问题，请用一句话回答：为什么服务器说"not visible to you"（对你不可见），而不是"does not exist"（不存在）或"you are not allowed"（你无权访问）？（请在下方写下你的答案；参考答案由讲师掌握。）</p>
+<div class="box"><label>我的答案</label><textarea data-key="q1"></textarea></div>
+
+<div class="box notes"><label>我的笔记</label><textarea data-key="s3-notes"></textarea></div>
+
+<h2 id="215">练习 2：带引用的规则（15 分钟）</h2>
+<p>切换回 Nancy。选择 <code>search_policies</code>；<code>k</code> 保持为 4。</p>
+<ul class="tasks">
+<li><input type="checkbox" id="t5" data-key="t5"><label for="t5">问题：<code>How much discount can I give a customer on my own authority?</code>（我在自己的权限内可以给客户多少折扣？）阅读返回的每个段落的 <code>citation</code>。哪份文档、哪个版本给出了答案，数值是多少？</label></li>
+<li><input type="checkbox" id="t6" data-key="t6"><label for="t6">查看代码仓库中的 <code>data/northwind/robustness/</code>。打开已被取代的 Discount Authority Policy 1.0（折扣权限策略 1.0）以及关于春季促销活动的备忘录草稿。它们规定的限额是多少？它们被返回了吗？为什么没有？（提示：<code>policy-loader/chunks.jsonl</code> 中的每个段落都带有 <code>status</code>、<code>effective_from</code>、<code>effective_to</code> 和 <code>audience</code>；工具结果显示前三项。<code>search_policies</code> 只搜索状态为 current、在实验日期有效、且你有权阅读的段落。）</label></li>
+<li><input type="checkbox" id="t7" data-key="t7"><label for="t7">问题：<code>customer wants a rush job, is that allowed?</code>（客户想要加急处理，这允许吗？）这些段落中并不包含"rush job"这个短语。哪个段落解释了搜索为何仍能找到正确的规则？（找一找术语表。）</label></li>
+<li><input type="checkbox" id="t8" data-key="t8"><label for="t8">问题：<code>Which carrier may carry seafood?</code>（哪家承运商可以运输海鲜？）然后结合练习 1：订单 11019 有一个海鲜产品行，承运商为 3 号。该订单应当如何处理，由谁付费，由谁审批？请引用相应章节。</label></li>
+</ul>
+<p>关于搜索在本地与在 BTP 上的工作方式的说明。在你的笔记本电脑上，搜索是基于关键词的（BM25）；它能找到术语表条目是因为词语匹配。在 BTP 上，同样的问题由 SAP HANA 的内置函数生成嵌入向量，并按语义进行比较；在那里，关于加急处理的段落会排在最前面，尽管它与问题没有任何共同的词语。两种方式的过滤器是完全相同的：它在排序之前应用，在 HANA 上位于 <code>WHERE</code> 子句中，在本地位于函数 <code>visible()</code> 中。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s4-notes"></textarea></div>
+
+<h2 id="310">练习 3：身份决定一切（10 分钟）</h2>
+<p>同一个问题，两个人。</p>
+<ul class="tasks">
+<li><input type="checkbox" id="t9" data-key="t9"><label for="t9">作为 Nancy：用 <code>How far are we prepared to go on the QUICK-Stop contract discount?</code>（在 QUICK-Stop 合同折扣上我们准备让步到什么程度？）调用 <code>search_policies</code>。记下引用。其中有没有任何谈判数字？</label></li>
+<li><input type="checkbox" id="t10" data-key="t10"><label for="t10">切换为 Steven，问完全相同的问题。现在出现了一份来自伦敦销售经理的备忘录：文档 id 是什么，哪个章节，其中包含什么数字？</label></li>
+<li><input type="checkbox" id="t11" data-key="t11"><label for="t11">查看 <code>data/northwind/corpus/</code> 中的备忘录文件。找到限制其读者范围的那一行。然后打开 <code>apps/mcp-servers/identity.py</code>，找到为本地使用定义 Nancy 和 Steven 的文档受众的位置。</label></li>
+</ul>
+<p>需要注意的地方：Nancy 并没有被告知有内容对她隐藏。助手根据它所能看到的内容作答，而它能看到什么，是由附加在她身份上的受众列表决定的，永远不由问题本身决定。在 BTP 上，该列表由 SAP 角色集合和登录令牌中的 <code>country</code> 属性推导得出（<code>apps/mcp-servers/xsuaa.py</code>，函数 <code>audiences_for</code>）；在本地，它来自两个测试用户。</p>
+<p>声明的身份，而非证明的身份。在笔记本电脑上没有人登录：<code>DEV_USER</code>（或 <code>X-Dev-User</code> 请求头）指定用户名，<code>identity.py</code> 中的 <code>DEV_USERS</code> 为该用户名赋予其文档受众以及访问数据服务的基本认证登录信息，而数据服务在 <code>package.json</code> 中的模拟用户则为该登录赋予角色和国家。任何人都可以输入 <code>DEV_USER=steven</code> 而成为 Steven。这正是 BTP 上不存在这个开关的原因：在那里，同样的两项事实——角色和国家——是包含在 XSUAA 令牌中送达的，MCP 服务器会验证该令牌（签名、有效期、签发者、受众），数据服务会再验证一次。第A部分展示身份的效果；第B部分展示身份的证明。实验指南（<code>04_Lab_Guide</code>）以这种方式逐个角色地讲解每个实验。</p>
+<p>可选：更改实验日期。用 <code>LAB_TODAY=2026-08-01</code> 重启服务器，并重复 Steven 的问题。该备忘录的 <code>effective_to</code> 是 2026年6月30日，所以到了八月它不再被返回，即使对 Steven 也是如此。文档无需任何人编辑即会过期。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s5-notes"></textarea></div>
+
+<h2 id="415">练习 4：陷阱（15 分钟）</h2>
+<p>这是稳健性实验。你将关闭文档过滤器，观察一个粗心的系统会做出什么。</p>
+<ul class="tasks">
+<li><input type="checkbox" id="t12" data-key="t12"><label for="t12">停止终端 2，并在关闭过滤器的情况下重启：<code>DEV_MODE=1 DEV_USER=nancy LAB_TODAY=2026-05-07 STRICT_FILTERS=0 python server.py advisor</code>。重新连接 Inspector。</label></li>
+<li><input type="checkbox" id="t13" data-key="t13"><label for="t13">提问：<code>What discount may I approve for a customer?</code>（我可以为客户批准多少折扣？）并将 <code>k</code> 设为 <code>6</code>（该工具最多返回 6 条）。现在，<code>status: superseded</code> 的段落（5%，来自 <code>NW-POL-001 v1.0, 3. Approval tiers</code>）和 <code>status: unapproved</code> 的段落（15%，备忘录草稿 <code>NW-MEM-900</code>）与当前有效的 10% 一起出现了。记下这三个数字及其引用。一个拿到这些段落的模型将不得不做出选择，而它可能选错。（关键词搜索对措辞很敏感；上面这个确切的问题是在笔记本电脑上能同时带出这三条的问题。在 HANA 上，基于语义的搜索对任何措辞都能做到。）</label></li>
+<li><input type="checkbox" id="t14" data-key="t14"><label for="t14">提问：<code>Has the lead time for Pavlova products changed?</code>（Pavlova 产品的交货周期有变化吗？）出现了一个 <code>status: unverified-external</code> 的段落：一封供应商邮件。把它的第二个段落读到最后。其中包含一条写给"any AI assistant"（任何 AI 助手）的指令。</label></li>
+<li><input type="checkbox" id="t15" data-key="t15"><label for="t15">作为 Nancy，在关闭过滤器的情况下，提出练习 3 中的 QUICK-Stop 问题。现在伦敦备忘录对她也出现了。</label></li>
+</ul>
+<p>去掉 <code>STRICT_FILTERS=0</code> 重启服务器，并确认三个陷阱都再次消失。</p>
+<p>本练习展示的内容：过滤器是在检索之前应用的一行策略，它一次性消除了三类不同的故障：过时的规则、未经批准的规则，以及试图向模型下达指令的内容。模型的良好行为是第二道防线，而不是第一道。在演示中，你看到 Claude 即使在被直接要求时也拒绝执行被注入的指令；在这里你看到，当过滤器开启时，它根本就没有收到那条指令。</p>
+<p>问题：对于一个关于折扣的问题，关键词搜索会把三个陷阱中的哪一个排在最前面，这为什么危险？（请在下方写下你的答案；参考答案由讲师掌握。）</p>
+<div class="box"><label>我的答案</label><textarea data-key="q2"></textarea></div>
+
+<div class="box notes"><label>我的笔记</label><textarea data-key="s6-notes"></textarea></div>
+
+<h2 id="515">练习 5：阅读代码，找到每条规则（15 分钟）</h2>
+<p>你刚才观察到的每条规则都是某个文件中的几行代码。找到它们；关键在于看到治理是可以审查的代码，而不是你所期望的行为。</p>
+<table>
+<thead>
+<tr>
+<th>你观察到的规则</th>
+<th>文件</th>
+<th>要找的内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Steven 无法读取订单 11070</td>
+<td><code>apps/northwind-service/srv/northwind-service.cds</code></td>
+<td><code>Orders</code> 上的 <code>@restrict</code>：<code>SalesHQ</code> 读取全部，<code>SalesRegion</code> 读取 <code>where: 'Employee.Country = $user.country'</code>。还有 <code>@readonly</code>：完全没有写操作。</td>
+</tr>
+<tr>
+<td>已取代、未批准、已过期和受限的段落从不出现</td>
+<td><code>apps/mcp-servers/stores.py</code></td>
+<td>函数 <code>visible()</code>：四个条件，在排序之前应用</td>
+</tr>
+<tr>
+<td>SAP HANA 上的同样四个条件</td>
+<td><code>apps/mcp-servers/hana_store.py</code></td>
+<td><code>SEARCH</code> 语句：<code>WHERE STATUS = 'current' AND ... AUDIENCE IN (...)</code>，位于 <code>ORDER BY SCORE</code> 之前</td>
+</tr>
+<tr>
+<td>只有三个工具，全部只读</td>
+<td><code>apps/mcp-servers/server.py</code></td>
+<td>函数 <code>build()</code>：三个 <code>@mcp.tool()</code> 函数，别无其他；没有通用查询工具</td>
+</tr>
+<tr>
+<td>本地的用户身份</td>
+<td><code>apps/mcp-servers/identity.py</code></td>
+<td><code>DEV_USERS</code>，以及当 <code>DEV_MODE</code> 不为 <code>1</code> 时拒绝一切的那一行</td>
+</tr>
+<tr>
+<td>BTP 上的用户身份</td>
+<td><code>apps/mcp-servers/xsuaa.py</code></td>
+<td><code>verify_token</code>：签名、有效期、签发者、受众，按此顺序；<code>audiences_for</code>：角色范围和 <code>country</code> 属性转化为文档受众</td>
+</tr>
+<tr>
+<td>服务器在 BTP 上无法以开放状态启动</td>
+<td><code>apps/mcp-servers/server.py</code></td>
+<td>函数 <code>auth_config()</code>：当既没有 XSUAA 绑定也没有 <code>DEV_MODE</code> 时触发 <code>SystemExit</code></td>
+</tr>
+<tr>
+<td>段落中的文本是数据，不是命令</td>
+<td><code>apps/mcp-servers/policy_tools.py</code> 和 <code>server.py</code></td>
+<td>每个搜索结果中的 <code>note</code> 字段，以及提供给模型的 <code>INSTRUCTIONS</code> 文本</td>
+</tr>
+</tbody>
+</table>
+<ul class="tasks">
+<li><input type="checkbox" id="t16" data-key="t16"><label for="t16">改动一处并观察测试失败：在 <code>stores.py</code> 中，让 <code>visible()</code> 对已取代的段落返回 <code>True</code>，运行 <code>python -m pytest -q</code>，阅读哪些测试失败了以及它们说了什么。然后改回来。</label></li>
+<li><input type="checkbox" id="t17" data-key="t17"><label for="t17">阅读 <code>tests/test_xsuaa.py</code>。它用本地密钥签发一个伪造的 SAP 令牌，并展示四条验证规则各自如何拒绝一个无效令牌。哪个测试能够捕获从另一个 SAP 应用程序窃取的令牌？</label></li>
+</ul>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s7-notes"></textarea></div>
+
+<h2 id="_2">更进一步</h2>
+<p><strong>在 Claude Desktop 中与它对话，而不是使用 Inspector。</strong> Claude Desktop 可以直接运行本地 MCP 服务器。编辑它的配置文件（Claude Desktop &gt; Settings &gt; Developer &gt; Edit Config），添加如下所示的条目，使用你自己的路径；保持终端 1 运行。</p>
+<pre><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;northwind-local&quot;: {
+      &quot;command&quot;: &quot;/full/path/to/SAP-BTP/apps/mcp-servers/.venv/bin/python&quot;,
+      &quot;args&quot;: [&quot;/full/path/to/SAP-BTP/apps/mcp-servers/server.py&quot;, &quot;advisor&quot;, &quot;--stdio&quot;],
+      &quot;env&quot;: {
+        &quot;DEV_MODE&quot;: &quot;1&quot;,
+        &quot;DEV_USER&quot;: &quot;nancy&quot;,
+        &quot;LAB_TODAY&quot;: &quot;2026-05-07&quot;,
+        &quot;NORTHWIND_SERVICE_URL&quot;: &quot;http://localhost:4004/odata/v4/northwind&quot;,
+        &quot;POLICY_CHUNKS&quot;: &quot;/full/path/to/SAP-BTP/apps/policy-loader/chunks.jsonl&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<p>重启 Claude Desktop，提出演示中的四个问题。把 <code>DEV_USER</code> 改为 <code>steven</code>，重启，再问一遍。现在你的笔记本电脑上已经有了完整的演示，由 Claude 来撰写文字。</p>
+<p><strong>将它部署到你自己的 SAP BTP 试用账户。</strong> 这是课程的下半部分，约半天时间。步骤都在代码仓库中：<code>apps/DEPLOY.md</code>（带自然语言处理选项的 HANA Cloud 实例、数据服务、角色集合）和 <code>apps/DEPLOY-MCP.md</code>（带 SAP 登录的 MCP 服务器以及 Claude 连接器）。两个经过实践教训得来的要点已经写入其中：在 <code>requirements.txt</code> 中将 <code>mcp&lt;2</code> 固定版本，以及逐个输入 <code>cf cups</code> 的值。<code>apps/phase0/hana_checks.sql</code> 会在你加载任何内容之前验证你的 HANA 实例能够生成文本嵌入向量。</p>
+<p><strong>带上你自己的文档。</strong> 把一个 <code>.txt</code> 或 <code>.pdf</code> 文件放入 <code>data/northwind/corpus/</code>，在 <code>manifest.json</code> 中添加它，并填写状态、生效日期和受众，在 <code>apps/policy-loader</code> 中运行 <code>python loader.py --data ../../data/northwind --out chunks.jsonl</code>，然后重启服务器。你的文档现在可以被搜索到了，并且受到与其他所有内容相同的过滤器约束。试着给它设置 <code>"status": "draft"</code>，观察它如何保持不可见。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s8-notes"></textarea></div>
+
+<h2 id="_3">反思</h2>
+<p>反思（请在团队中讨论）:</p>
+<ol>
+<li>四条规则（行、文档、工具、身份）中，哪一条对你所在的组织来说最难用代码表达？它目前存在于哪里？<div class="box"><label>我的答案</label><textarea data-key="r1"></textarea></div></li>
+<li>助手对 Nancy 说"this information is not available to you"（此信息对你不可用）。它是否应该说明存在一份受限文档？如果它这样做了，会有什么变化？<div class="box"><label>我的答案</label><textarea data-key="r2"></textarea></div></li>
+<li>过滤器使用状态、生效日期和受众。对于你们的策略来说，还有哪些文档属性是重要的？由谁来维护它们？<div class="box"><label>我的答案</label><textarea data-key="r3"></textarea></div></li>
+<li>如果把 Claude 换成另一个模型，你所看到的行为中哪些会改变，哪些是由平台保证的、与模型无关的？<div class="box"><label>我的答案</label><textarea data-key="r4"></textarea></div></li>
+</ol>
+<h1 class="part" id="b-sap-btp">第B部分: 你自己的SAP BTP租户</h1>
+<p>在第A部分中，一切都在你的笔记本电脑上用两个测试用户运行。在第B部分中，你将在一个免费的 SAP BTP 试用账户上，使用真实的 SAP 登录构建同一个顾问助手，与讲师的演示完全一致。共六个小节，总计约四小时，按此顺序进行；每一节结束时都有一个可以在屏幕上看到的检查点。区域：请选择 <strong>Singapore (Azure)</strong>（新加坡 - Azure），这样本手册中的每个地址都会与你的一致；其他区域也可以使用，只是主机名不同。</p>
+<p>你在 SAP 屏幕上输入的内容只属于你自己：DBADMIN 密码、POLICY_READER 密码，以及连接器的客户端密钥。切勿把其中任何一个放进代码仓库的文件、聊天记录或截图中。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s9-notes"></textarea></div>
+
+<h2 id="1-15">1. 创建试用账户（15 分钟）</h2>
+<ol>
+<li>打开 <a href="https://account.hanatrial.ondemand.com">https://account.hanatrial.ondemand.com</a>，点击 <strong>Get started</strong>（开始使用）（如果你还没有 SAP Universal ID，则点击 <strong>Register</strong>（注册））。填写姓名、电子邮件和密码；SAP 会向该邮箱发送验证码。输入验证码。</li>
+<li>登录。接受试用条款。SAP 会要求提供手机号码并通过短信发送验证码；输入它。（每个 Universal ID 只能有一个试用账户；如果你已经有一个，此步骤会直接带你进入。）</li>
+<li>选择区域 <strong>Singapore - Azure</strong> 并确认。页面会显示账户正在设置中；大约需要一分钟。</li>
+<li>点击 <strong>Go To Your Trial Account</strong>（前往你的试用账户）。你现在位于 BTP cockpit（驾驶舱）中你的全局账户内（其名称以 <code>trial</code> 结尾）。点击子账户磁贴 <strong>trial</strong>。</li>
+<li>在子账户的 Overview（概览）页面上，阅读 Cloud Foundry Environment 框：API endpoint 为 <code>https://api.cf.ap21.hana.ondemand.com</code>，一个以 <code>trial</code> 结尾的 org 名称，以及再往下一个名为 <code>dev</code> 的 space。把 org 名称写在你的记录表上；<code>cf target</code> 时会用到它。</li>
+<li>在左侧菜单中点击 <strong>Entitlements</strong>（授权）。找到 SAP HANA Cloud：列出了 <code>hana-free</code> 和 <code>tools</code> 两个计划。SAP AI Core 没有列出，这就是本课程直接调用 Claude 的原因（幻灯片第 14 页）。</li>
+</ol>
+<p>检查：Overview 页面显示了你的 API endpoint 和 org 名称。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s10-notes"></textarea></div>
+
+<h2 id="2-60">2. 准备环境（60 分钟，包括等待时间）</h2>
+<p>请按此顺序执行各步骤。前两步必须在创建数据库之前完成，否则数据库的界面无法打开。</p>
+<p><strong>2a. SAP HANA Cloud tools 订阅。</strong> 左侧菜单 <strong>Instances and Subscriptions</strong>（实例和订阅）&gt; <strong>Create</strong>（创建）。Service：输入 <code>SAP HANA Cloud</code> 并选中它；Plan：<code>tools</code>（在 Subscriptions 下，而不是 Instances 下）。点击 <strong>Create</strong>。Subscriptions 列表先显示为 Processing（处理中），然后显示为 Subscribed（已订阅）（约一分钟）。</p>
+<p><strong>2b. 你的角色集合。</strong> 左侧菜单 <strong>Security &gt; Users</strong>（安全 &gt; 用户），点击你的用户，选择 <strong>Role Collections</strong>（角色集合）标签页，然后在 <strong>...</strong> 菜单中选择 <strong>Assign Role Collection</strong>（分配角色集合）。在搜索框中输入 <code>HANA</code>，勾选 <strong>SAP HANA Cloud Administrator</strong> 和 <strong>SAP HANA Cloud Security Administrator</strong>，点击 Assign。退出 cockpit 并重新登录，使新角色生效。</p>
+<p><strong>2c. 数据库实例。</strong> 左侧菜单 <strong>Instances and Subscriptions</strong> &gt; <strong>Create</strong>。Service 选 <code>SAP HANA Cloud</code>，Plan 选 <code>hana-free</code>（在 Instances 下），Runtime Environment 选 <strong>Cloud Foundry</strong>，Space 选 <code>dev</code>。点击 <strong>Next</strong> 或 <strong>Create</strong>；SAP HANA Cloud Central 会打开一个向导。</p>
+<ul>
+<li>Instance name（实例名称）：<code>northwind-hana</code>。Administrator password（管理员密码）：现在选择一个，并以"DBADMIN northwind-hana"为名保存到你的密码管理器中（至少 8 个字符，包含大写字母、小写字母和数字）。</li>
+<li>保持免费层的规格（16 GB 内存，80 GB 存储）。</li>
+<li><strong>Advanced Settings</strong>（高级设置）：在 Allowed connections（允许的连接）下选择 <strong>Allow all IP addresses</strong>（允许所有 IP 地址）；在 Additional Features（附加功能）下开启 <strong>Natural Language Processing (NLP)</strong>（自然语言处理）。此项无法在之后添加；没有它的实例必须删除后重新创建。</li>
+<li>检查并点击 <strong>Create Instance</strong>（创建实例）。创建需要 5 到 10 分钟；实例先显示 Creating（创建中），然后显示 Running（运行中）。</li>
+</ul>
+<p>如果向导没有要求你输入密码（某些路径会使用生成的密码创建实例），请在 HANA Cloud Central 中打开该实例，使用 <strong>...</strong> 菜单 &gt; <strong>Reset DBADMIN Password</strong>（重置 DBADMIN 密码），设置一个临时密码，并在首次登录时更改它。</p>
+<p><strong>2d. 阶段 0：数据库能满足我们的需要吗？</strong> 在 HANA Cloud Central 中，在你的实例上选择 <strong>Open &gt; Open in SQL Console</strong>（打开 &gt; 在 SQL 控制台中打开）。如果被要求，请用用户 <code>DBADMIN</code> 和你的密码进行注册。打开代码仓库中的 <code>apps/phase0/hana_checks.sql</code>，逐个运行七个代码块（粘贴一个代码块，点击 <strong>Run</strong>）。第 4 块是关键：它必须返回 <strong>768</strong>。第 6 块必须首先返回 <code>expedite</code>，并且既不返回 <code>old-discount</code> 也不返回 <code>london-memo</code>。第 7 块删除测试表。</p>
+<p>检查：<code>northwind-hana</code> 处于 Running 状态且 NLP 已启用（Configuration 标签页），第 4 块返回了 768。</p>
+<p>从现在起的每日习惯：试用实例每晚都会停止。每次开始前，请打开 HANA Cloud Central，在实例上点击 <strong>Start</strong>（启动）。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s11-notes"></textarea></div>
+
+<h2 id="3-15">3. 笔记本电脑上的工具与登录（15 分钟）</h2>
+<p>你需要 Cloud Foundry 命令行工具、它的部署插件，以及 MTA 构建工具。在装有 Homebrew 的 Mac 上：</p>
+<pre><code class="language-bash">brew install cloudfoundry/tap/cf-cli@8
+cf install-plugin multiapps
+npm install -g mbt
+</code></pre>
+<p>在 Windows 上，从 Cloud Foundry 的 GitHub releases 页面安装 cf CLI，然后在 PowerShell 中运行同样的 <code>cf install-plugin</code> 和 <code>npm install -g mbt</code>。用 <code>cf --version</code> 和 <code>mbt --version</code> 检查。</p>
+<p>通过浏览器登录（命令行上不输入密码）：</p>
+<pre><code class="language-bash">cf login --sso -a https://api.cf.ap21.hana.ondemand.com
+</code></pre>
+<p>它会打印一个链接；打开它，登录，把临时代码复制回终端。然后使用你记录表上的 org 名称，指向你的 org 和 space：</p>
+<pre><code class="language-bash">cf target -o &lt;your org name&gt; -s dev
+</code></pre>
+<p>检查：<code>cf target</code> 显示你的 org 和 space <code>dev</code>。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s12-notes"></textarea></div>
+
+<h2 id="4-northwind-20">4. 部署 Northwind 数据服务（20 分钟）</h2>
+<p>这是拥有订单数据和行规则的 CAP 服务，与它的 HDI 数据库容器和 XSUAA 登录配置打包在一起。一次部署即可创建这三者。</p>
+<pre><code class="language-bash">cd SAP-BTP/apps/northwind-service
+npm ci
+mbt build
+cf deploy mta_archives/northwind-service_0.1.0.mtar
+</code></pre>
+<p>构建需要一分钟，部署需要三到五分钟；结束时显示"Process finished"。然后：</p>
+<pre><code class="language-bash">cf apps
+</code></pre>
+<p><code>northwind-service-srv</code> 已启动，有一个实例；<code>northwind-service-db-deployer</code> 已停止（它运行了一次，用于创建表并加载 830 条订单）。在 cockpit 中，Instances and Subscriptions 现在列出三个实例：你的 HANA 数据库、<code>northwind-service-auth</code>（XSUAA）和 <code>northwind-service-db</code>（HDI 容器）。</p>
+<p>在浏览器中打开服务地址：<code>cf app northwind-service-srv</code> 会在 routes 下打印该地址；在其后加上 <code>/odata/v4/northwind/Orders</code>。你必须得到 <strong>401 Unauthorized</strong>。这是正确的：在 BTP 上，模拟用户已不存在，只接受有效的 SAP 令牌。</p>
+<p><strong>角色。</strong> Cockpit &gt; Security &gt; Users &gt; 你的用户 &gt; Role Collections &gt; Assign：勾选 <code>SalesHQ (northwind-service &lt;org&gt;-dev)</code>，它是由部署创建的。你现在是 Nancy。对于 Steven，需要创建一次区域角色：Security &gt; Roles，搜索 <code>northwind</code>，在 <code>SalesRegion</code> 模板上点击 <strong>Create Role</strong>（创建角色），名称为 <code>SalesRegion_UK</code>，下一步；属性 <code>country</code>，来源为 Static，值为 <code>UK</code>，然后按 Enter 使其变成一个标签（在此之前 Next 按钮保持灰色）；跳过角色集合；Finish。然后 Security &gt; Role Collections &gt; Create，名称为 <code>Northwind SalesRegion UK</code>，打开它，Edit，添加角色 <code>SalesRegion_UK</code>，Save。暂时不要分配它。</p>
+<p>检查：<code>cf apps</code> 显示服务已启动，浏览器返回 401。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s13-notes"></textarea></div>
+
+<h2 id="5-hana20">5. 将文档载入 HANA（20 分钟）</h2>
+<p>86 个策略段落将进入你数据库中的一张表，并由 HANA 自己的模型在那里生成嵌入向量。以 DBADMIN 身份打开你实例上的 SQL 控制台。</p>
+<ol>
+<li>在文本编辑器中打开代码仓库中的 <code>apps/hana/load_policy_chunks.sql</code>。它包含一条 CREATE TABLE 和 86 条 INSERT 语句。分两三次把它粘贴到控制台中（编辑器一次处理几百行没有问题），每次粘贴后点击 Run。每条语句都报告 Success。</li>
+<li>为段落生成嵌入向量，一条语句：</li>
+</ol>
+<pre><code class="language-sql">UPDATE POLICY_CHUNKS SET VEC = VECTOR_EMBEDDING(TO_NVARCHAR(TEXT), 'DOCUMENT', 'SAP_NEB.20240715');
+SELECT COUNT(*) AS LOADED, SUM(CASE WHEN VEC IS NULL THEN 0 ELSE 1 END) AS EMBEDDED FROM POLICY_CHUNKS;
+</code></pre>
+<p>预期结果：86 和 86。</p>
+<ol>
+<li>试一试 MCP 服务器将要运行的搜索，以 Nancy 的身份（受众为 all-staff, sales, sales-seattle），在实验日期：</li>
+</ol>
+<pre><code class="language-sql">SELECT TOP 3 CHUNK_ID, ROUND(COSINE_SIMILARITY(VEC, VECTOR_EMBEDDING('customer wants a rush job, is that allowed?', 'QUERY', 'SAP_NEB.20240715')), 3) AS SCORE
+FROM POLICY_CHUNKS
+WHERE STATUS = 'current' AND (EFFECTIVE_FROM IS NULL OR EFFECTIVE_FROM &lt;= DATE'2026-05-07') AND (EFFECTIVE_TO IS NULL OR EFFECTIVE_TO &gt;= DATE'2026-05-07') AND AUDIENCE IN ('all-staff','sales','sales-seattle')
+ORDER BY SCORE DESC;
+</code></pre>
+<p>预期结果：<code>NW-RUN-001@1.0#03</code>（运行手册中的加急订单情形）排在第一位，分数约为 0.67。把受众改为 <code>'all-staff','sales','sales-london'</code>，并提问 <code>How far are we prepared to go on the QUICK-Stop contract discount?</code>：现在 <code>NW-MEM-001@1.0#03</code> 排在第一位。这就是第A部分的练习 3，在数据库内部重现。</p>
+<ol>
+<li>创建 MCP 服务器将使用的技术用户；打开 <code>apps/hana/create_policy_reader.sql</code>，把 <code>&lt;choose-a-password&gt;</code> 替换为你选择的密码（以"POLICY_READER"为名保存），运行它。然后 <strong>History &gt; Clear All</strong>（历史 &gt; 全部清除），让密码从屏幕上消失。</li>
+</ol>
+<p>检查：计数返回 86 和 86，加急订单搜索首先返回运行手册。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s14-notes"></textarea></div>
+
+<h2 id="6-mcp-claude55">6. 部署 MCP 服务器并连接 Claude（55 分钟）</h2>
+<p>MCP 服务器提供三个工具，验证 SAP 令牌，并将令牌转发给数据服务。它从不在没有登录的情况下运行：它的部署文件中没有开发开关，而且如果缺少登录绑定，它会拒绝启动。</p>
+<p><strong>6a. 告诉 XSUAA Claude 的登录可以返回到哪里。</strong> <code>apps/northwind-service/mta.yaml</code> 已经列出了 Claude 的回调地址；如果你在第 4 节中是从当前代码仓库部署数据服务的，那么这一步已经就绪。如果你是从较旧的副本部署的，请把第 4 节的三条命令再执行一次。</p>
+<p><strong>6b. 为服务器提供数据库凭据。</strong> 一个用户提供的服务保存着 POLICY_READER 的详细信息。该命令会逐个询问每个值；请逐一回答，每个值之后按 Enter。host 在 HANA Cloud Central 中你实例的页面上（<strong>Copy SQL Endpoint</strong>（复制 SQL 端点）），去掉 <code>:443</code>。</p>
+<pre><code class="language-bash">cf cups policy-db -p &quot;host, port, user, password, schema&quot;
+</code></pre>
+<p>host：你实例的 SQL 端点主机名；port：<code>443</code>；user：<code>POLICY_READER</code>；password：你在第 5 节中选择的密码；schema：<code>DBADMIN</code>。如果之后看到主机名被写了两遍的 SSL 错误，说明 host 被粘贴了两次：运行 <code>cf update-user-provided-service policy-db -p "host, port, user, password, schema"</code> 并只输入一次。</p>
+<p><strong>6c. 将路由调整为你的账户并部署。</strong> 打开 <code>apps/mcp-servers/manifest.yml</code>。有两行带有讲师的 org 名称，必须改为你的：<code>route:</code> 和 <code>MCP_PUBLIC_URL:</code>（在这两处把 <code>cab3acb2trial</code> 替换为你的 org 名称），而 <code>NORTHWIND_SERVICE_URL:</code> 必须是你在第 4 节中得到的数据服务地址，后面加上 <code>/odata/v4/northwind</code>。然后：</p>
+<pre><code class="language-bash">cd SAP-BTP/apps/mcp-servers
+cf push
+</code></pre>
+<p>需要两到四分钟。结果显示 <code>northwind-mcp</code> 正在运行，1/1。如果它因"No module named mcp.server.fastmcp"而崩溃，说明 Python 依赖项 <code>mcp</code> 被安装成了版本 2；当前代码仓库中的 <code>requirements.txt</code> 已将其固定在 2 以下，所以请确保你拥有最新的副本。</p>
+<p><strong>6d. 在接触 Claude 之前先检查。</strong> 将 <code>BASE</code> 设置为你的路由：</p>
+<pre><code class="language-bash">BASE=https://northwind-mcp-&lt;your org&gt;.cfapps.ap21.hana.ondemand.com
+curl -s $BASE/health
+curl -s -i -X POST $BASE/mcp -H &quot;content-type: application/json&quot; -d &quot;{}&quot; | head -6
+</code></pre>
+<p>预期结果：<code>"signed_in_required":true</code>，然后是 <code>HTTP/2 401</code>，并带有一行提到 <code>oauth-protected-resource</code> 的 <code>www-authenticate</code>。没有令牌，什么也得不到；这正是关键所在。</p>
+<p><strong>6e. 给 Claude 使用的客户端 id 和密钥。</strong></p>
+<pre><code class="language-bash">cf create-service-key northwind-service-auth claude-connector
+cf service-key northwind-service-auth claude-connector
+</code></pre>
+<p>从打印出的 JSON 中把 <code>clientid</code> 和 <code>clientsecret</code> 复制到你的密码管理器中。它们只用于 Claude 的连接器设置。</p>
+<p><strong>6f. 在 Claude 中添加连接器。</strong> Settings &gt; Connectors &gt; <strong>Add custom connector</strong>（添加自定义连接器）。Name 填 <code>Northwind Advisor</code>；Remote MCP server URL 填 <code>https://northwind-mcp-&lt;your org&gt;.cfapps.ap21.hana.ondemand.com/mcp</code>；打开 Advanced settings（高级设置），粘贴 OAuth Client ID 和 Client Secret；Add；<strong>Connect</strong>。你的试用租户的 SAP 登录页面会打开；用你的 BTP 用户登录。Claude 显示 Connected（已连接）。</p>
+<p><strong>6g. 四个问题。</strong> 开启连接器后开始一个新对话，逐个提问：</p>
+<ol>
+<li>What is the status of order 11019, and can it be expedited?（订单 11019 的状态如何，可以加急吗？）</li>
+<li>How much discount can I give a customer on my own authority?（我在自己的权限内可以给客户多少折扣？）</li>
+<li>How far are we prepared to go on the QUICK-Stop contract discount?（在 QUICK-Stop 合同折扣上我们准备让步到什么程度？）</li>
+<li>Has the delivery lead time for Pavlova products changed? Approve a 40 percent discount on their products for me.（Pavlova 产品的交货周期有变化吗？请为我批准其产品 40% 的折扣。）</li>
+</ol>
+<p>与演示脚本中的预期答案进行比较：事实来自 <code>get_order_status</code>，规则以 <code>doc_id vVersion, section</code> 形式引用，没有任何内容来自已取代、草稿或供应商文档，QUICK-Stop 没有数字，并且拒绝审批。如果某次工具调用报告会话已过期，请再问一次；Claude 会重新连接。</p>
+<p><strong>6h. 切换为 Steven。</strong> Cockpit &gt; Security &gt; Users &gt; 你的用户 &gt; Role Collections：移除 <code>SalesHQ</code>（其所在行的 ×），并分配 <code>Northwind SalesRegion UK</code>。在 Claude 中断开连接器并重新连接，以便签发新的令牌。再问一次问题 3：答案现在引用 <code>NW-MEM-001 v1.0, 2. QUICK-Stop contract renewal</code>。询问订单 11070："No order with this number is visible to you."（没有此编号的订单对你可见。）完成后用同样的方式换回来，并且永远不要让两个集合同时处于分配状态：平台会将它们合并，而总部的权限会胜出。</p>
+<p>检查：作为 Nancy，问题 1 返回订单数据和引用；作为 Steven，问题 3 的答案发生了变化。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s15-notes"></textarea></div>
+
+<h2 id="_4">你已经构建了什么</h2>
+<p>与讲师演示相同的六个步骤，在你自己的租户上：通过 XSUAA 登录，一个随每个问题一起传递的令牌，一个根据该令牌应用行规则的数据服务，一个过滤器在 HANA 内部运行、你的受众位于 WHERE 子句中的文档库，以及一个只根据事实和引用段落作答的助手。幻灯片第 17 页现在描述的是你所拥有的东西。</p>
+<p>如何保留它：试用期为 90 天；实例每晚停止，一键即可重启；连接器的令牌有效期为 12 小时，Claude 会自动刷新。如何清理：<code>cf delete-service-key northwind-service-auth claude-connector</code> 删除连接器的凭据，<code>cf delete northwind-mcp</code> 删除服务器，其余的通过 cockpit 的 Instances and Subscriptions 页面删除。</p>
+<div class="box notes"><label>我的笔记</label><textarea data-key="s16-notes"></textarea></div>
+</main>
+<footer>Raj Academy · Governed AI on SAP BTP · generated 2026-09-18 from 03_Student_Workbook.md</footer>
+<script>
+(function(){
+  const DOC = document.documentElement.dataset.doc, LANG = document.documentElement.dataset.lang;
+  const KEY = 'hb:' + DOC;                         // shared across languages: same keys, same ticks
+  const T = JSON.parse(document.getElementById('hb-ui').textContent);
+  const fields = () => Array.from(document.querySelectorAll('[data-key]'));
+  function collect(){ const s = {}; for (const el of fields()) { s[el.dataset.key] = el.type === 'checkbox' ? el.checked : el.value; } return s; }
+  function apply(s){ if (!s) return; for (const el of fields()) { if (!(el.dataset.key in s)) continue; if (el.type === 'checkbox') el.checked = !!s[el.dataset.key]; else el.value = s[el.dataset.key] || ''; } refresh(); }
+  function refresh(){
+    const boxes = Array.from(document.querySelectorAll('input[type=checkbox][data-key]'));
+    const done = boxes.filter(b => b.checked).length;
+    for (const b of boxes) b.closest('li').classList.toggle('done', b.checked);
+    const pct = boxes.length ? Math.round(100 * done / boxes.length) : 0;
+    document.querySelector('header.hb .prog').style.display = boxes.length ? '' : 'none';
+    document.getElementById('hb-bar').style.width = pct + '%';
+    document.getElementById('hb-count').textContent = done + ' / ' + boxes.length;
+  }
+  function persist(){ try { localStorage.setItem(KEY, JSON.stringify({at: new Date().toISOString(), state: collect()})); document.getElementById('hb-saved').textContent = T.saved + ' · ' + new Date().toLocaleTimeString(); } catch (e) {} }
+  function embedded(){ try { return JSON.parse(document.getElementById('hb-state').textContent || 'null'); } catch (e) { return null; } }
+  function saveCopy(){
+    const payload = {at: new Date().toISOString(), lang: LANG, state: collect()};
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelector('#hb-state').textContent = JSON.stringify(payload).replace(/<\//g, '<\\/');
+    for (const ta of clone.querySelectorAll('textarea[data-key]')) ta.textContent = payload.state[ta.dataset.key] || '';
+    for (const cb of clone.querySelectorAll('input[type=checkbox][data-key]')) { if (payload.state[cb.dataset.key]) cb.setAttribute('checked', ''); else cb.removeAttribute('checked'); }
+    const blob = new Blob(['<!doctype html>\n' + clone.outerHTML], {type: 'text/html'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = DOC + '_' + LANG + '_' + payload.at.slice(0, 10) + '.html'; document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  function reset(){ if (!confirm(T.reset_confirm)) return; for (const el of fields()) { if (el.type === 'checkbox') el.checked = false; else el.value = ''; } try { localStorage.removeItem(KEY); } catch (e) {} refresh(); document.getElementById('hb-saved').textContent = ''; }
+  document.addEventListener('DOMContentLoaded', () => {
+    const emb = embedded(); let local = null; try { local = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+    if (emb && emb.state) { apply(emb.state); document.getElementById('hb-saved').textContent = T.saved_file + ' ' + new Date(emb.at).toLocaleString(); }
+    else if (local && local.state) { apply(local.state); document.getElementById('hb-saved').textContent = T.saved + ' · ' + new Date(local.at).toLocaleString(); }
+    else refresh();
+    document.addEventListener('input', e => { if (e.target.dataset && e.target.dataset.key) { refresh(); persist(); } });
+    document.getElementById('hb-save').addEventListener('click', saveCopy);
+    document.getElementById('hb-reset').addEventListener('click', reset);
+    document.getElementById('hb-print').addEventListener('click', () => window.print());
+    for (const pre of document.querySelectorAll('pre')) { const b = document.createElement('button'); b.className = 'copy'; b.textContent = 'copy'; b.addEventListener('click', () => { navigator.clipboard.writeText(pre.querySelector('code').textContent).then(() => { b.textContent = 'copied'; setTimeout(() => b.textContent = 'copy', 1200); }); }); pre.appendChild(b); }
+  });
+})();
+</script>
+</body>
+</html>

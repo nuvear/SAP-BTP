@@ -1,0 +1,652 @@
+[
+ {
+  "id": "A1",
+  "title": "Prerequisites on this laptop",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "git found (https://git-scm.com)"
+   ],
+   [
+    true,
+    "node found (Node 20 or later)"
+   ],
+   [
+    true,
+    "npm found (comes with Node)"
+   ],
+   [
+    true,
+    "npx found (comes with Node)"
+   ],
+   [
+    true,
+    "python 3.11 (3.11 or later needed)"
+   ],
+   [
+    true,
+    "policy-loader/chunks.jsonl present (86 passages)"
+   ],
+   [
+    true,
+    "chunks.jsonl has 86 passages"
+   ]
+  ],
+  "at": "2026-09-18T13:13:57",
+  "seconds": 0.0
+ },
+ {
+  "id": "A2",
+  "title": "Terminal 1: npm ci and npm test (9 tests)",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "node_modules already present, skipping npm ci"
+   ],
+   [
+    true,
+    "npm test: same request, different users, different rows -> '# pass 9'"
+   ]
+  ],
+  "at": "2026-09-18T13:13:58",
+  "seconds": 1.0
+ },
+ {
+  "id": "A3",
+  "title": "Terminal 1: start the data service",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "Terminal 1: data service answers on http://localhost:4004 (user nancy)"
+   ],
+   [
+    true,
+    "GET /Orders?$top=3 as nancy returns three orders"
+   ],
+   [
+    true,
+    "the same URL without a user is refused (401)"
+   ]
+  ],
+  "at": "2026-09-18T13:13:59",
+  "seconds": 1.0
+ },
+ {
+  "id": "A4",
+  "title": "Terminal 2: venv, pip install, pytest (45 tests)",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    ".venv already present, skipping venv + pip install"
+   ],
+   [
+    true,
+    "mcp SDK (1.x), PyJWT, httpx and pytest import inside .venv"
+   ],
+   [
+    true,
+    "pytest: 45 passed, 4 warnings in 9.70s"
+   ]
+  ],
+  "at": "2026-09-18T13:14:10",
+  "seconds": 10.6
+ },
+ {
+  "id": "A5",
+  "title": "Terminal 2: start the MCP server as Nancy, list the tools",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "Terminal 2: MCP server up as DEV_USER=nancy"
+   ],
+   [
+    true,
+    "GET /health -> {\"status\":\"ok\",\"server\":\"northwind-advisor\",\"signed_in_required\":false} (DEV_MODE: no sign-in, laptop only)"
+   ],
+   [
+    true,
+    "tools/list over Streamable HTTP: get_order_status, get_product_availability, search_policies"
+   ]
+  ],
+  "at": "2026-09-18T13:14:11",
+  "seconds": 1.1
+ },
+ {
+  "id": "A6",
+  "title": "Exercise 1: live facts and the row rule",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "11019 as Nancy: customer Rancho grande (Argentina)"
+   ],
+   [
+    true,
+    "11019 salesperson Michael Suyama, office UK"
+   ],
+   [
+    true,
+    "11019 required 2026-05-11, days_until_required 4 (lab date 2026-05-07)"
+   ],
+   [
+    true,
+    "11019 carrier Federal Shipping (id 3)"
+   ],
+   [
+    true,
+    "11019 lines: Spegesild (Seafood, 95 in stock), Maxilaku (Confections, 10 in stock, 60 on order)"
+   ],
+   [
+    true,
+    "every fact carries data_read_at (2026-09-18T05:14:11+00:00)"
+   ],
+   [
+    true,
+    "11070 as Nancy: Andrew Fuller, USA, 26 days"
+   ],
+   [
+    true,
+    "11019 as Steven: visible (UK salesperson)"
+   ],
+   [
+    true,
+    "11070 as Steven: found false, 'No order with this number is visible to you.'"
+   ],
+   [
+    true,
+    "Terminal 1 log shows the row rule answering with 404 for Orders(11070)"
+   ],
+   [
+    true,
+    "Rössle Sauerkraut: discontinued True, 26 in stock, reorder level 0"
+   ],
+   [
+    true,
+    "Chai: discontinued False, 39 in stock (a normal product)"
+   ]
+  ],
+  "at": "2026-09-18T13:14:15",
+  "seconds": 3.9
+ },
+ {
+  "id": "A7",
+  "title": "Exercise 2: rules with citations",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "discount question cites NW-POL-001 v2.0: NW-GLO-001 v1.0, Frequent questions | NW-POL-003 v1.0, Clearance discount | NW-POL-001 v2.0, 5. Clearance exception for discontinued products | NW-RUN-001 v1.0, Situation 6: The customer asks for a bigger discount"
+   ],
+   [
+    true,
+    "the number is 10 percent (locally restated by NW-POL-001 v2.0 section 5 and the runbook's Situation 6)"
+   ],
+   [
+    true,
+    "the superseded 1.0 policy (5 percent) is not returned"
+   ],
+   [
+    true,
+    "the unapproved spring-campaign draft (15 percent) is not returned"
+   ],
+   [
+    true,
+    "every returned passage has status current"
+   ],
+   [
+    true,
+    "rush job: the glossary (NW-GLO-001) bridges 'rush job' to 'expedite': NW-GLO-001 v1.0, Glossary | NW-RUN-001 v1.0, Situation 1: The customer asks for a rush order | NW-RUN-001 v1.0, Situation 9: The customer wants to return goods | NW-RUN-001 v1.0, Situation 7: The carrier on an order is wrong for the goods"
+   ],
+   [
+    true,
+    "seafood carrier: NW-POL-004 cited: NW-POL-004 v1.0, 1. Purpose | NW-POL-004 v1.0, 2. Storage class by product category | NW-RUN-001 v1.0, Situation 7: The carrier on an order is wrong for the goods | NW-POL-004 v1.0, 3. Orders with more than one storage class"
+   ],
+   [
+    true,
+    "the passage names Speedy Express as the seafood carrier"
+   ]
+  ],
+  "at": "2026-09-18T13:14:16",
+  "seconds": 1.7
+ },
+ {
+  "id": "A8",
+  "title": "Exercise 3: identity decides (Nancy, Steven, and August)",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "Nancy: no London memo: NW-ACC-QUICK v1.0, Shipping preferences | NW-GLO-001 v1.0, Frequent questions | NW-ACC-SAVEA v1.0, Contract discount | NW-ACC-QUICK v1.0, Account summary"
+   ],
+   [
+    true,
+    "Nancy: no negotiating figure anywhere in her passages"
+   ],
+   [
+    true,
+    "Steven: NW-MEM-001 v1.0, 2. QUICK-Stop contract renewal appears"
+   ],
+   [
+    true,
+    "the memo holds the figure (prepared to go to 20 percent); effective 2026-04-20 to 2026-06-30"
+   ],
+   [
+    true,
+    "Terminal 2: MCP server up as DEV_USER=steven LAB_TODAY=2026-08-01"
+   ],
+   [
+    true,
+    "optional: on 2026-08-01 the memo has expired, even for Steven"
+   ],
+   [
+    true,
+    "Terminal 2: MCP server up as DEV_USER=nancy"
+   ]
+  ],
+  "at": "2026-09-18T13:14:19",
+  "seconds": 3.1
+ },
+ {
+  "id": "A9",
+  "title": "Exercise 4: the traps, filter off and on again",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "Terminal 2: MCP server up as DEV_USER=nancy STRICT_FILTERS=0"
+   ],
+   [
+    true,
+    "filter off: current 10 percent (NW-POL-001 v2.0) still there"
+   ],
+   [
+    true,
+    "filter off: superseded 5 percent (NW-POL-001 v1.0, 3. Approval tiers) now appears"
+   ],
+   [
+    true,
+    "filter off: unapproved draft 15 percent (NW-MEM-900) now appears"
+   ],
+   [
+    true,
+    "citations: NW-GLO-001 v1.0, Frequent questions | NW-RUN-001 v1.0, Situation 6: The customer asks for a bigger discount | NW-POL-001 v1.0, 3. Approval tiers | NW-POL-001 v2.0, 3. Approval tiers | NW-MEM-900 vdraft, Introduction | NW-POL-001 v1.0, 1. Purpose"
+   ],
+   [
+    true,
+    "filter off: the supplier email (unverified-external) appears: NW-EXT-901 v1.0, Introduction | NW-EXT-901 v1.0, Introduction"
+   ],
+   [
+    true,
+    "the email carries an instruction addressed to 'any AI assistant' (data, not a command)"
+   ],
+   [
+    true,
+    "filter off: Nancy now sees the London memo"
+   ],
+   [
+    true,
+    "Terminal 2: MCP server up as DEV_USER=nancy"
+   ],
+   [
+    true,
+    "filter on again: superseded and unapproved passages gone"
+   ],
+   [
+    true,
+    "filter on again: the supplier email is gone"
+   ],
+   [
+    true,
+    "filter on again: Nancy no longer sees the memo"
+   ]
+  ],
+  "at": "2026-09-18T13:14:24",
+  "seconds": 5.0
+ },
+ {
+  "id": "A10",
+  "title": "Exercise 5: find each rule, break one, watch a test fail",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "the row rule in northwind-service.cds"
+   ],
+   [
+    true,
+    "visible() in stores.py refuses non-current passages"
+   ],
+   [
+    true,
+    "the same condition inside the HANA SEARCH statement"
+   ],
+   [
+    true,
+    "DEV_USERS in identity.py"
+   ],
+   [
+    true,
+    "audiences_for in xsuaa.py"
+   ],
+   [
+    true,
+    "auth_config() exits when there is no XSUAA binding and no DEV_MODE"
+   ],
+   [
+    true,
+    "server.py defines exactly 3 tools, all read-only"
+   ],
+   [
+    true,
+    "mutation: visible() now lets superseded passages through"
+   ],
+   [
+    true,
+    "pytest now fails: 1 test(s), e.g. tests/test_servers.py::test_visible[change1-False] - AssertionError: a..."
+   ],
+   [
+    true,
+    "restored; test_token_issued_to_another_application_is_refused passes (the audience check)"
+   ]
+  ],
+  "at": "2026-09-18T13:14:36",
+  "seconds": 11.9
+ },
+ {
+  "id": "A11",
+  "title": "Bonus: the same server over stdio",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "stdio transport (desktop clients): three tools, order 11019 found"
+   ]
+  ],
+  "at": "2026-09-18T13:14:37",
+  "seconds": 1.1
+ },
+ {
+  "id": "A12",
+  "title": "Stop both servers",
+  "kind": "auto",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "MCP server stopped"
+   ],
+   [
+    true,
+    "data service stopped"
+   ]
+  ],
+  "at": "2026-09-18T13:14:42",
+  "seconds": 4.2
+ },
+ {
+  "id": "B1",
+  "title": "Create the SAP BTP trial account",
+  "kind": "manual",
+  "status": "assumed",
+  "evidence": [
+   [
+    true,
+    "marked assumed by the person at the keyboard"
+   ]
+  ],
+  "at": "2026-09-18T13:15:22",
+  "seconds": 0.0
+ },
+ {
+  "id": "B2",
+  "title": "Prepare the environment",
+  "kind": "manual",
+  "status": "assumed",
+  "evidence": [
+   [
+    true,
+    "marked assumed by the person at the keyboard"
+   ]
+  ],
+  "at": "2026-09-18T13:15:22",
+  "seconds": 0.0
+ },
+ {
+  "id": "B3",
+  "title": "Tools on your laptop and sign-in (cf, mbt, cf login --sso)",
+  "kind": "probe",
+  "status": "fail",
+  "evidence": [
+   [
+    false,
+    "cf CLI installed (brew install cloudfoundry/tap/cf-cli@8)"
+   ],
+   [
+    false,
+    "mbt installed (npm i -g mbt)"
+   ],
+   [
+    false,
+    "cf target: not signed in or wrong org/space (cf login --sso)"
+   ]
+  ],
+  "at": "2026-09-18T13:15:22",
+  "seconds": 0.0
+ },
+ {
+  "id": "B4",
+  "title": "HANA instance exists and is healthy",
+  "kind": "probe",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "skipped (no cf CLI on this machine): cf service northwind-hana: exists, last operation succeeded"
+   ],
+   [
+    true,
+    "the trial instance stops every night; if it is stopped, start it in HANA Cloud Central before B7"
+   ]
+  ],
+  "at": "2026-09-18T13:15:22",
+  "seconds": 0.0
+ },
+ {
+  "id": "B5",
+  "title": "Deploy the Northwind data service (mbt build, cf deploy)",
+  "kind": "manual",
+  "status": "assumed",
+  "evidence": [
+   [
+    true,
+    "marked assumed by the person at the keyboard"
+   ]
+  ],
+  "at": "2026-09-18T13:15:22",
+  "seconds": 0.0
+ },
+ {
+  "id": "B6",
+  "title": "Data service deployed and guarded by XSUAA",
+  "kind": "probe",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "skipped (no cf CLI on this machine): cf app northwind-service-srv: running"
+   ],
+   [
+    true,
+    "data service on BTP refuses an anonymous request (401); XSUAA guards it"
+   ],
+   [
+    true,
+    "skipped (no cf CLI on this machine): XSUAA instance northwind-service-auth: last operation succeeded (redirect URIs for Claude applied)"
+   ]
+  ],
+  "at": "2026-09-18T13:15:23",
+  "seconds": 1.1
+ },
+ {
+  "id": "B7",
+  "title": "The documents into HANA (SQL console)",
+  "kind": "manual",
+  "status": "assumed",
+  "evidence": [
+   [
+    true,
+    "marked assumed by the person at the keyboard"
+   ]
+  ],
+  "at": "2026-09-18T13:15:23",
+  "seconds": 0.0
+ },
+ {
+  "id": "B8",
+  "title": "Give the MCP server its database credentials (cf cups, typed)",
+  "kind": "manual",
+  "status": "assumed",
+  "evidence": [
+   [
+    true,
+    "marked assumed by the person at the keyboard"
+   ]
+  ],
+  "at": "2026-09-18T13:15:23",
+  "seconds": 0.0
+ },
+ {
+  "id": "B9",
+  "title": "policy-db service exists",
+  "kind": "probe",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "skipped (no cf CLI on this machine): user-provided service policy-db exists (POLICY_READER credentials, typed, never in a file)"
+   ]
+  ],
+  "at": "2026-09-18T13:15:23",
+  "seconds": 0.0
+ },
+ {
+  "id": "B10",
+  "title": "Deploy the MCP server (cf push)",
+  "kind": "manual",
+  "status": "assumed",
+  "evidence": [
+   [
+    true,
+    "marked assumed by the person at the keyboard"
+   ]
+  ],
+  "at": "2026-09-18T13:15:23",
+  "seconds": 0.0
+ },
+ {
+  "id": "B11",
+  "title": "MCP server up: health, OAuth metadata, and 401 without a token",
+  "kind": "probe",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "skipped (no cf CLI on this machine): cf app northwind-mcp: running"
+   ],
+   [
+    true,
+    "GET /health -> 200 {\"status\":\"ok\",\"server\":\"northwind-advisor\",\"signed_in_required\":true} (sign-in required)"
+   ],
+   [
+    true,
+    "protected-resource metadata names this server as its own authorization server"
+   ],
+   [
+    true,
+    "authorization-server metadata points at XSUAA authorize/token, no dynamic registration"
+   ],
+   [
+    true,
+    "POST /mcp without a token -> 401, WWW-Authenticate carries resource_metadata"
+   ],
+   [
+    true,
+    "a forged bearer token is refused just the same (401)"
+   ]
+  ],
+  "at": "2026-09-18T13:15:27",
+  "seconds": 4.3
+ },
+ {
+  "id": "B12",
+  "title": "Service key for Claude's connector",
+  "kind": "manual",
+  "status": "assumed",
+  "evidence": [
+   [
+    true,
+    "marked assumed by the person at the keyboard"
+   ]
+  ],
+  "at": "2026-09-18T13:15:27",
+  "seconds": 0.0
+ },
+ {
+  "id": "B13",
+  "title": "Service key exists",
+  "kind": "probe",
+  "status": "pass",
+  "evidence": [
+   [
+    true,
+    "skipped (no cf CLI on this machine): service key claude-connector exists (its values live only in your password manager and Claude's connector settings)"
+   ]
+  ],
+  "at": "2026-09-18T13:15:27",
+  "seconds": 0.0
+ },
+ {
+  "id": "B14",
+  "title": "Connect Claude",
+  "kind": "manual",
+  "status": "assumed",
+  "evidence": [
+   [
+    true,
+    "marked assumed by the person at the keyboard"
+   ]
+  ],
+  "at": "2026-09-18T13:15:27",
+  "seconds": 0.0
+ },
+ {
+  "id": "B15",
+  "title": "The demo questions in Claude (as Nancy)",
+  "kind": "manual",
+  "status": "assumed",
+  "evidence": [
+   [
+    true,
+    "marked assumed by the person at the keyboard"
+   ]
+  ],
+  "at": "2026-09-18T13:15:27",
+  "seconds": 0.0
+ }
+]
