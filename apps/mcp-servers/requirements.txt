@@ -1,5 +1,7 @@
-mcp>=1.27
+mcp>=1.27,<2
 httpx>=0.27
+# XSUAA token validation on BTP
+PyJWT[crypto]>=2.9
 # tests
 pytest>=8
 # HANA store (POLICY_STORE=hana)

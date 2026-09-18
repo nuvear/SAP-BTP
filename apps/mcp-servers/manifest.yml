@@ -1,0 +1,23 @@
+# cf push from this folder deploys the combined 'advisor' MCP server (all three tools on one endpoint).
+# It never runs without sign-in: no DEV_MODE here, and server.py refuses to start without the XSUAA binding.
+---
+applications:
+  - name: northwind-mcp
+    memory: 256M
+    disk_quota: 512M
+    instances: 1
+    buildpacks:
+      - python_buildpack
+    command: python server.py advisor
+    health-check-type: http
+    health-check-http-endpoint: /health
+    routes:
+      - route: northwind-mcp-cab3acb2trial.cfapps.ap21.hana.ondemand.com
+    services:
+      - northwind-service-auth      # the XSUAA instance the data service uses: one sign-in for both
+      - policy-db                   # user-provided: POLICY_READER credentials for POLICY_CHUNKS (cf cups)
+    env:
+      MCP_PUBLIC_URL: https://northwind-mcp-cab3acb2trial.cfapps.ap21.hana.ondemand.com
+      NORTHWIND_SERVICE_URL: https://cab3acb2trial-dev-northwind-service-srv.cfapps.ap21.hana.ondemand.com/odata/v4/northwind
+      POLICY_STORE: hana
+      LAB_TODAY: "2026-05-07"

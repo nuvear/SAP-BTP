@@ -1,7 +1,7 @@
 # apps: the Northwind Order Advisor, local build
 
-Everything here runs on a laptop with no SAP BTP account. It is the part of the solution that does not
-depend on decisions or accounts. See `STATUS.md` for what is tested and what still needs BTP.
+Everything here runs on a laptop with no SAP BTP account, and the same code is deployed on BTP trial with SAP sign-in
+(`DEPLOY.md`, `DEPLOY-MCP.md`). See `STATUS.md` for what is tested where. Students: start with the workbook's Setup section.
 
 ```text
 apps/
@@ -30,8 +30,8 @@ python loader.py --data ../../data/northwind --out chunks.jsonl     # 86 passage
 
 cd ../mcp-servers
 pip install -r requirements.txt
-python -m pytest -q                                                 # 24 tests
-DEV_MODE=1 LAB_TODAY=2026-05-07 python server.py advisor            # http://localhost:8000/mcp
+python -m pytest -q                                                 # 45 tests
+DEV_MODE=1 DEV_USER=nancy LAB_TODAY=2026-05-07 python server.py advisor   # http://localhost:8000/mcp
 ```
 
 Try it with MCP Inspector (`npx @modelcontextprotocol/inspector`): connect to `http://localhost:8000/mcp`
@@ -56,7 +56,7 @@ with the header `X-Dev-User: nancy`, then again with `steven`, and ask both for 
 
 | Variable | Meaning |
 |---|---|
-| `DEV_MODE=1` | Local users from the `X-Dev-User` header. Without it the server refuses every call, until XSUAA validation exists. |
+| `DEV_MODE=1` | Local users from `DEV_USER` or the `X-Dev-User` header. Without it the server verifies XSUAA tokens (`xsuaa.py`) and refuses every call that has none. Never deploy with it. |
 | `LAB_TODAY=2026-05-07` | The fixed lab date. The sample data ends on 2026-05-06. |
 | `STRICT_FILTERS=0` | Robustness lab only: switches the document filter off, to show what it protects against. |
-| `POLICY_STORE=hana` | Use SAP HANA Cloud instead of the local keyword store. Not connected yet. |
+| `POLICY_STORE=hana` | Use SAP HANA Cloud (semantic search with built-in embeddings) instead of the local keyword store. Credentials from `HANA_*` variables or the `policy-db` binding. |

@@ -53,6 +53,14 @@ resources:
           credential-types:
             - "binding-secret"
             - "x509"
+          # Where XSUAA may send the browser back after sign-in. Claude's custom connectors use the first
+          # two; the wildcard covers the App Router and the web chat on this Cloud Foundry domain (Stage B).
+          redirect-uris:
+            - "https://claude.ai/api/mcp/auth_callback"
+            - "https://claude.com/api/mcp/auth_callback"
+            - "https://*.cfapps.ap21.hana.ondemand.com/**"
+          token-validity: 43200
+          refresh-token-validity: 604800
         role-collections:
           - name: 'SalesHQ (northwind-service ${org}-${space})'
             description: 'generated'

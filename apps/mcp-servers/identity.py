@@ -3,8 +3,9 @@
 Two modes:
   DEV_MODE=1   Local development. The user comes from the 'X-Dev-User' header, or from the DEV_USER
                environment variable. The users match the mocked users of the CAP service.
-  otherwise    SAP BTP. The user comes from the XSUAA token. NOT IMPLEMENTED YET: token validation is
-               Phase 0 work on a real BTP account, and this module fails closed until it exists.
+  otherwise    SAP BTP. The user comes from the XSUAA bearer token that the MCP SDK's auth middleware has
+               already verified with xsuaa.XsuaaVerifier (signature, expiry, issuer, audience). Without a
+               verified token there is no user, and every tool call fails closed.
 
 The servers never decide which ROWS a user may see. They pass the identity on, and the CAP service decides.
 The Policy server does filter DOCUMENTS by audience, because the documents live in its own store.
@@ -40,8 +41,15 @@ def resolve_user(headers: dict[str, str] | None) -> User:
             raise NotSignedIn("Unknown or missing development user.")
         audiences, password = DEV_USERS[name]
         return User(name, tuple(audiences), (name, password))
-    # Fail closed. Do not decode a token without checking its signature, issuer, audience and expiry.
-    raise NotSignedIn("XSUAA token validation is not implemented yet (Phase 0). Set DEV_MODE=1 for local work.")
+    # BTP: the auth middleware put the verified token into the request context. No token, no user.
+    from mcp.server.auth.middleware.auth_context import get_access_token
+    from xsuaa import XsuaaAccessToken, audiences_for, country_of
+    token = get_access_token()
+    if not isinstance(token, XsuaaAccessToken):
+        raise NotSignedIn("Sign in to SAP BTP first. This server accepts only verified XSUAA tokens.")
+    claims = token.claims
+    name = claims.get("user_name") or claims.get("email") or claims.get("sub") or "unknown"
+    return User(name, audiences_for(token.scopes, country_of(claims)), None, bearer_token=token.token)
 
 
 def headers_from_context(ctx) -> dict[str, str]:
